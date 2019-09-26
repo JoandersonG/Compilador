@@ -1,0 +1,16 @@
+PROGRAMAINICI%O
+    DEFINAINSTRUCAO Trilha COMO
+    INICIO#a ser apagado
+        Mova 3 passos
+        Aguarde Ate Robo Pronto
+        Vire Para ESQUERDA
+        Apagar a Lampada
+        Vire para DIREITA
+        Mova 1 Passo
+        Aguarde ate Robo Pronto
+    FIM
+    EXECUCAOINICIO
+        Repita 3 VEZES Trilha
+        Vire Para DIREITA
+    FIMEXECUCAO
+FIMPROGRAMA
