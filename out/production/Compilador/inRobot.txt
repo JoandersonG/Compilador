@@ -1,5 +1,6 @@
-PROGRAMAINICI%O
-    DEFINAINSTRUCAO Trilha COMO
+PROGRAMAINICIO!!
+    0003$
+    DEFINAINSTRUCAO AT@AF Trilha COMO
     INICIO#a ser apagado
         Mova 3 passos
         Aguarde Ate Robo Pronto
