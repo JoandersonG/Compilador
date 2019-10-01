@@ -1,14 +1,19 @@
 PROGRAMAINICIO!!
     0003$
-    120TRILHA
+    120TRILha
     DEFINAINSTRUCAO AT@AF Trilha COMO
     INICIO#a ser apagado
         Mova 3 passos
         Aguarde Ate Robo Pronto
         Vire Para ESQUERDA
-        Apagar a Lampada
+        Apague a Lampada
         Vire para DIREITA
-        Mova 1 Passo
+        Mova 1 Passos         
+
+
+
+
+
         Aguarde ate Robo Pronto
     FIM
     EXECUCAOINICIO

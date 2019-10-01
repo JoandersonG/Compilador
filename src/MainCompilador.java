@@ -2,14 +2,14 @@ import java.io.*;
 import java.util.*;
 
 public class MainCompilador {
-
+    private static Map<String, String> errosTabela;
     public static void main(String[] args) {
 
         //é necessário um arquivo de entrada com o programa a ser compilado
         try {
-            String path = "/home/wilton/Downloads/Compilador/src/inRobot.txt";
+            String path = "/home/joanderson/Coding/Compilador/src/inRobot.txt";
 
-            ArrayList<Token> tokenTable = analiseLexica(path);
+            List<Token> tokenTable = analiseLexica(path);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -18,7 +18,7 @@ public class MainCompilador {
 
     }
 
-    private static ArrayList<Token> analiseLexica(String path) throws IOException {
+    private static List<Token> analiseLexica(String path) throws IOException {
         char[] line;
 
         LinhaAutomato[] autReconhecedorCadeias = new LinhaAutomato[5];
@@ -34,7 +34,7 @@ public class MainCompilador {
 
         // Inicializando tabela de descrições dos erros
         TabelaErros tabelaErros = new TabelaErros();
-        Map<String, String> errosTabela = tabelaErros.getErrors();
+        errosTabela = tabelaErros.getErrors();
 
         // Inicializando lista de erros
         List<Erro> listError = new ArrayList<Erro>();
@@ -70,7 +70,7 @@ public class MainCompilador {
                             case 1: {
                                 Object erroObj = errosTabela.get("<id_mal_formado>");
                                 Erro erro = new Erro("<id_mal_formado>", erroObj.toString()
-                                        .replace("{lexema}", lexema.toString())
+                                        .replace("{lexema}", getLexemaOriginal(path,linha,coluna))
                                         .replace("{linha}", String.valueOf(linha))
                                         .replace("{coluna}", String.valueOf(coluna))
                                 );
@@ -81,7 +81,7 @@ public class MainCompilador {
                             case 2: {
                                 Object erroObj = errosTabela.get("<nmr_mal_formado>");
                                 Erro erro = new Erro("<nmr_mal_formado>", erroObj.toString()
-                                        .replace("{lexema}", lexema.toString())
+                                        .replace("{lexema}", getLexemaOriginal(path,linha,coluna))
                                         .replace("{linha}", String.valueOf(linha))
                                         .replace("{coluna}", String.valueOf(coluna))
                                 );
@@ -92,7 +92,7 @@ public class MainCompilador {
                             default: {
                                 Object erroObj = errosTabela.get("<simb_not_id>");
                                 Erro erro = new Erro("<simb_not_id>", erroObj.toString()
-                                        .replace("{lexema}", lexema.toString())
+                                        .replace("{lexema}", getLexemaOriginal(path,linha,coluna))
                                         .replace("{linha}", String.valueOf(linha))
                                         .replace("{coluna}", String.valueOf(coluna))
                                 );
@@ -113,6 +113,9 @@ public class MainCompilador {
                         // Caso contrário é um identificador
                         else {
                             String tokenString = "<identificador, " + lexema.toString() + ">";
+                            if (tokenString.matches("<identificador, >")) {
+                                continue;//token vazio (apenas com quebras) não inserido
+                            }
                             Token token = new Token(lexema.toString(), tokenString, linha, coluna);
                             tokenList.add(token);
 
@@ -135,8 +138,9 @@ public class MainCompilador {
                             // Caso o último estado anterior tenha sido o 1 é um identificador mal formado
                             case 1: {
                                 Object erroObj = errosTabela.get("<id_mal_formado>");
+
                                 Erro erro = new Erro("<id_mal_formado>", erroObj.toString()
-                                        .replace("{lexema}", lexema.toString())
+                                        .replace("{lexema}", getLexemaOriginal(path,linha,coluna))
                                         .replace("{linha}", String.valueOf(linha))
                                         .replace("{coluna}", String.valueOf(coluna))
                                 );
@@ -147,7 +151,7 @@ public class MainCompilador {
                             case 2: {
                                 Object erroObj = errosTabela.get("<nmr_mal_formado>");
                                 Erro erro = new Erro("<nmr_mal_formado>", erroObj.toString()
-                                        .replace("{lexema}", lexema.toString())
+                                        .replace("{lexema}", getLexemaOriginal(path,linha,coluna))
                                         .replace("{linha}", String.valueOf(linha))
                                         .replace("{coluna}", String.valueOf(coluna))
                                 );
@@ -158,7 +162,7 @@ public class MainCompilador {
                             default: {
                                 Object erroObj = errosTabela.get("<simb_not_id>");
                                 Erro erro = new Erro("<simb_not_id>", erroObj.toString()
-                                        .replace("{lexema}", lexema.toString())
+                                        .replace("{lexema}", getLexemaOriginal(path,linha,coluna))
                                         .replace("{linha}", String.valueOf(linha))
                                         .replace("{coluna}", String.valueOf(coluna))
                                 );
@@ -203,7 +207,7 @@ public class MainCompilador {
                             case 1: {
                                 Object erroObj = errosTabela.get("<id_mal_formado>");
                                 Erro erro = new Erro("<id_mal_formado>", erroObj.toString()
-                                        .replace("{lexema}", lexema.toString())
+                                        .replace("{lexema}", getLexemaOriginal(path,linha,coluna))
                                         .replace("{linha}", String.valueOf(linha))
                                         .replace("{coluna}", String.valueOf(coluna))
                                 );
@@ -214,7 +218,7 @@ public class MainCompilador {
                             case 2: {
                                 Object erroObj = errosTabela.get("<nmr_mal_formado>");
                                 Erro erro = new Erro("<nmr_mal_formado>", erroObj.toString()
-                                        .replace("{lexema}", lexema.toString())
+                                        .replace("{lexema}", getLexemaOriginal(path,linha,coluna))
                                         .replace("{linha}", String.valueOf(linha))
                                         .replace("{coluna}", String.valueOf(coluna))
                                 );
@@ -223,9 +227,12 @@ public class MainCompilador {
                             }
                             // É um símbolo mal formado caso contrário
                             default: {
+
+
+
                                 Object erroObj = errosTabela.get("<simb_not_id>");
                                 Erro erro = new Erro("<simb_not_id>", erroObj.toString()
-                                        .replace("{lexema}", lexema.toString())
+                                        .replace("{lexema}", getLexemaOriginal(path,linha,coluna))
                                         .replace("{linha}", String.valueOf(linha))
                                         .replace("{coluna}", String.valueOf(coluna))
                                 );
@@ -325,7 +332,10 @@ public class MainCompilador {
             System.out.println();
             System.out.println("TOKENS");
             for (Token token : tokenList) {
-                System.out.println("Lexema: " + token.getLexema() + " Token: " + token.getToken() + " Linha: " + token.getLinha() + " Coluna: " + token.getColuna());
+                System.out.println("Lexema: " + token.getLexema()
+                        + " Token: " + token.getToken()
+                        + " Linha: " + token.getLinha()
+                        + " Coluna: " + token.getColuna());
             }
         }
 
@@ -337,7 +347,27 @@ public class MainCompilador {
             }
         }
 
-        return new ArrayList<Token>();
+        return tokenList;
+    }
+
+    private static String getLexemaOriginal(String path, int linha, int coluna) throws FileNotFoundException {
+        Scanner sc2 = new Scanner(new File(path));
+        int cont = 1;
+        String aux = sc2.nextLine();
+        while (cont != linha){
+            aux = sc2.nextLine();
+            cont++;
+        }//saio na linha certa
+        cont = 1;
+        char[] auxToChar = aux.toCharArray();
+        //char[] lexemaOriginal = new char[];
+        StringBuilder sbAux = new StringBuilder();
+        for (int j = coluna-1; j < auxToChar.length; j++) {
+            sbAux.append(String.valueOf(auxToChar[j]));
+            if (auxToChar[j] <= 32) break;//quebra de texto
+        }
+        sc2.close();
+        return sbAux.toString();
     }
 
 
