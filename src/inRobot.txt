@@ -1,8 +1,7 @@
-PROGRAMAINICIO!!
-    0003$
-    120TRILha
-    DEFINAINSTRUCAO AT@AF Trilha COMO
-    INICIO#a ser apagado
+PROGRAMAINICIO 
+	#uashuiadhahsdiahsdiaushdua
+    DEFINAINSTRUCAO Trilha COMO
+    INICIO
         Mova 3 passos
         Aguarde Ate Robo Pronto
         Vire Para ESQUERDA

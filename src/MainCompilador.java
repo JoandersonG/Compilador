@@ -106,7 +106,7 @@ public class MainCompilador {
                             tokenList.add(token);
                         }
                         // Verifica se é um número
-                        else if (lexema.toString().matches("-?\\d+(\\.\\d+)?")) {
+                        else if (lexema.toString().matches("\\d+")) {
                             Token token = new Token(lexema.toString(), "<numero, " + lexema.toString() + ">", linha, coluna);
                             tokenList.add(token);
                         }
@@ -132,7 +132,10 @@ public class MainCompilador {
                     break;
                 }
                 char c = line[i];
-                if (c == '#' && estadoAtual != 0) {
+                if (c == '#') {
+                    if (estadoAtual == 0) {
+                        break;//começo de linha tem comentário
+                    }
                     if (estadoAtual == 4) {//estado de erro
                         switch (estadoAnterior) {
                             // Caso o último estado anterior tenha sido o 1 é um identificador mal formado
@@ -176,7 +179,7 @@ public class MainCompilador {
                             tokenList.add(token);
                         }
                         // Verifica se é um número
-                        else if (lexema.toString().matches("-?\\d+(\\.\\d+)?")) {
+                        else if (lexema.toString().matches("\\d+")) {
                             Token token = new Token(lexema.toString(), "<numero, " + lexema.toString() + ">", linha, coluna);
                             tokenList.add(token);
                         }
@@ -246,7 +249,7 @@ public class MainCompilador {
                             tokenList.add(token);
                         }
                         // Verifica se é um número
-                        else if (lexema.toString().matches("-?\\d+(\\.\\d+)?")) {
+                        else if (lexema.toString().matches("\\d+")) {
                             Token token = new Token(lexema.toString(), "<numero, " + lexema.toString() + ">", linha, coluna);
                             tokenList.add(token);
                         }
