@@ -6,4 +6,4 @@ Link para o drive onde está armazenado o documento contendo os autômatos e exp
 https://drive.google.com/drive/folders/1VaaJ3nJOo0ONDVsn33WeRx0gm6lkD4GK?usp=sharing
 
 ## Testes
-Os entradas de testes juntamente com as imagens de suas saídas estão presentes na pastas "Testes" deste repositório.
+As entradas de testes juntamente com as imagens de suas saídas estão presentes na pastas "Testes" deste repositório.
