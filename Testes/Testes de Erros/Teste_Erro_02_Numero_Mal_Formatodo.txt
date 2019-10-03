@@ -1,0 +1,11 @@
+#Olá, isso é um comentário.
+#Teste de ERRO 02 - Número mal formatado.
+
+PROGRAMAINICIO
+
+    EXECUCAOINICIO
+        Repita 120S VEZES VIRE PARA ESQUERDA
+        Vire Para DIREITA
+    FIMEXECUCAO
+
+FIMPROGRAMA

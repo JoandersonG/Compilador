@@ -1,0 +1,11 @@
+#Olá, isso é um comentário.
+#Teste Correto 01 - Mova e acenda a lâmpada. 
+
+PROGRAMAINICIO
+    EXECUCAOINICIO
+	MOVA PARA ESQUERDA 
+        Repita 3 VEZES VIRE PARA DIREITA
+        ACENDA A LAMPADA
+    FIMEXECUCAO
+
+FIMPROGRAMA

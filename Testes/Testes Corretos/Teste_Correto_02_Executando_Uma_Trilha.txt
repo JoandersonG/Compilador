@@ -1,0 +1,21 @@
+#Olá, isso é um comentário.
+#Teste Correto 02 - Executando uma trilha.
+
+PROGRAMAINICIO 
+    DEFINAINSTRUCAO Trilha COMO
+    INICIO
+
+        Mova 3 passos
+        Aguarde Ate Robo Pronto
+        Vire Para ESQUERDA
+        Apague a Lampada
+        Vire para DIREITA
+        Mova 1 Passos         
+        Aguarde ate Robo Pronto
+
+    FIM
+    EXECUCAOINICIO
+        Repita 3 VEZES Trilha
+        Vire Para DIREITA
+    FIMEXECUCAO
+FIMPROGRAMA

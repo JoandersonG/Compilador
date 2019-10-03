@@ -1,0 +1,11 @@
+#Olá, isso é um comentário.
+#Teste de ERRO 03 - Número mal formatado Seguido de simbolo não identificado.
+
+PROGRAMAINICIO
+
+    EXECUCAOINICIO
+        Repita 120s VEZES VIRE PARA ESQUERDA
+        Vire Para _Direita_
+    FIMEXECUCAO
+
+FIMPROGRAMA

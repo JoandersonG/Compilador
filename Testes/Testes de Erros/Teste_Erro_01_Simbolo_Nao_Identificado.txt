@@ -1,0 +1,11 @@
+#Olá, isso é um comentário.
+#Teste de ERRO 01 - Simbolos não identificados!
+
+PROGRAMAINICIO
+    !int!
+    EXECUCAOINICIO
+	Vire Para ESQUERDA
+	0003$
+        Vire Para DIREITA
+    FIMEXECUCAO
+FIMPROGRAMA
