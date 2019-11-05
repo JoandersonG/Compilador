@@ -5,7 +5,7 @@ PROGRAMAINICIO
         Mova 3 passos
         Aguarde Ate Robo Pronto
         Vire Para ESQUERDA
-        Apague a Lampada
+        Apague Lampada
         Vire para DIREITA
         Mova 1 Passos         
 
@@ -16,7 +16,7 @@ PROGRAMAINICIO
         Aguarde ate Robo Pronto
     FIM
     EXECUCAOINICIO
-        Repita 3 VEZES Trilha
+        Repita 3 VEZES Trilha fimrepita
         Vire Para DIREITA
     FIMEXECUCAO
 FIMPROGRAMA

@@ -19,6 +19,30 @@ public class Token {
         this.lexema = lexema;
     }
 
+    public String getJustToken() {
+        char[] tk = null;
+        StringBuilder value = new StringBuilder();
+
+        if( token.charAt(0) == '<') {
+
+            tk = token.toCharArray();
+            for (int i = 0; i < tk.length; i++) {
+                if(tk[i] == '<') {
+                    continue; //ignora
+                }
+                if(tk[i] == ',') {
+                    break;
+                }
+                value.append(tk[i]);
+
+            }
+        }
+        else {
+            return token;
+        }
+        return value.toString();
+    }
+
     public String getToken() {
         return token;
     }

@@ -14,11 +14,109 @@ public class MainCompilador {
 
             List<Token> tokenTable = analiseLexica(path);
             MainCompilador.popularTabelaSintatica();
+            tabelaSintaticaToUpperCase();
+            analiseSintatica(tokenTable);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+
+    }
+
+    private static void tabelaSintaticaToUpperCase() {
+        for (int i = 0; i < 46; i++) {
+            for (int j = 0; j < 25; j++) {
+                if(tabelaSintatica[i][j] != null) {
+                    tabelaSintatica[i][j] = tabelaSintatica[i][j].toUpperCase();
+                    //System.out.println(tabelaSintatica[i][j]);
+                }
+            }
+        }
+    }
+
+    private static boolean isTerminal(String simbolo) {
+        for (int i = 0; i < 46; i++) {
+            if (tabelaSintatica[i][0]!=null && tabelaSintatica[i][0].equals(simbolo)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static String getLadoDireitoRegra(String naoTerminal, String terminal) {
+        int linha = -1, coluna = -1;
+        for (int i = 1; i < 46; i++) {
+            if (tabelaSintatica[i][0].equals(terminal)) {
+                linha = i;
+                break;
+            }
+        }
+        if (linha == -1) {
+            return null;
+        }
+        for (int j = 1; j < 25; j++) {
+            if (tabelaSintatica[0][j].equals(naoTerminal)) {
+                coluna = j;
+                break;
+            }
+        }
+        if (coluna == -1) {
+            return null;
+        }
+        return tabelaSintatica[linha][coluna];
+    }
+
+
+    private static void analiseSintatica(List<Token> cadeiaTokens) {
+        //coloco $ no fim da cadeia:
+        cadeiaTokens.add(new Token("$","$",cadeiaTokens.size(),0));
+        //crio a pilha:
+        Stack<String> pilha = new Stack<>();
+        //adiciono $ na pilha:
+        pilha.push("$");
+        //adiciono o símbolo inicial da gramática:
+        pilha.push(tabelaSintatica[0][1]);
+        int ponteiroCadeia = 0;
+
+        String topoPilha;
+        Token simboloAtual;
+        //todo: converter em maiúsculo a tabela sintática
+        do {
+            topoPilha = pilha.peek();
+            simboloAtual = cadeiaTokens.get(ponteiroCadeia);
+            //se topoPilha for terminal ou $:
+            if (isTerminal(topoPilha) || topoPilha.equals("$")) {
+                if (topoPilha.equals(simboloAtual.getToken())) {//lexema ou token?
+                    pilha.pop();
+                    ponteiroCadeia++;
+                }
+                else{
+                    System.out.println("Erro 1 em " + simboloAtual.getToken() + " comparado com " + topoPilha);
+                    System.out.println("Linha: " + simboloAtual.getLinha() + "Coluna: " + simboloAtual.getColuna());
+                    return;
+                }
+            }
+            else {//topoPilha é um não-terminal
+                //se existe na tabela sintática uma regra de topoPilha::=simboloAtual alguma outra coisa
+                String ladoDireito = getLadoDireitoRegra(topoPilha,simboloAtual.getToken());
+                if (ladoDireito != null) {
+                    pilha.pop();
+                    /////empilhar em sentido inverso o ladoDireito da regra:
+                    String[] ladoDireitoStrings = ladoDireito.split(" ");
+                    for (int i = ladoDireitoStrings.length-1; i >= 0; i--) {
+                        pilha.push(ladoDireitoStrings[i]);
+                    }
+                }
+                else {
+                    System.out.println("Erro 2 em " + simboloAtual.getToken() + " comparado com " + topoPilha);
+                    System.out.println("Linha: " + simboloAtual.getLinha() + " Coluna: " + simboloAtual.getColuna());
+                    return;
+                }
+            }
+        }
+        while(!(topoPilha.equals(simboloAtual.getToken()) && pilha.peek().equals("$")));
+        System.out.println("Análise sintática: tudo certo!!");
 
     }
 
@@ -116,20 +214,15 @@ public class MainCompilador {
         tabelaSintatica[40][0] = "senao";
         tabelaSintatica[41][0] = "vezes";
         tabelaSintatica[42][0] = "vire";
-        tabelaSintatica[43][0] = "A|a|B|b|...|Z|z";
-        tabelaSintatica[44][0] = "0|...|9";
+        tabelaSintatica[43][0] = "id";
+        tabelaSintatica[44][0] = "num";
         tabelaSintatica[45][0] = "$";
-
-
-
-
-
 
 
         tabelaSintatica[38-3][1] = "programainicio Declaracao execucaoinicio Comando ComandoMais fimexecucao fimprograma";
 
         tabelaSintatica[13-3][2] = "definainstrucao Identificador como Comando Declaracao";
-        tabelaSintatica[18-3][2] = "lambda";
+        tabelaSintatica[18-3][2] = " ";
 
         tabelaSintatica[29-3][3] = "inicio ComandoBloco fim";
 
@@ -137,7 +230,7 @@ public class MainCompilador {
         tabelaSintatica[7-3][4] = "Comando ComandoMais";
         tabelaSintatica[9-3][4] = "Comando ComandoMais";
         tabelaSintatica[15-3][4] = "Comando ComandoMais";
-        tabelaSintatica[21-3][4] = "lambda";
+        tabelaSintatica[21-3][4] = " ";
         tabelaSintatica[27-3][4] = "Comando ComandoMais";
         tabelaSintatica[29-3][4] = "Comando ComandoMais";
         tabelaSintatica[31-3][4] = "Comando ComandoMais";
@@ -164,7 +257,7 @@ public class MainCompilador {
         tabelaSintatica[7-3][6] = "Comando ComandoBloco";
         tabelaSintatica[9-3][6] = "Comando ComandoBloco";
         tabelaSintatica[15-3][6] = "Comando ComandoBloco";
-        tabelaSintatica[20-3][6] = "lambda";
+        tabelaSintatica[20-3][6] = " ";
         tabelaSintatica[27-3][6] = "Comando ComandoBloco";
         tabelaSintatica[29-3][6] = "Comando ComandoBloco";
         tabelaSintatica[31-3][6] = "Comando ComandoBloco";
@@ -180,14 +273,14 @@ public class MainCompilador {
 
         tabelaSintatica[42-3][9] = "se Condicao faca Comando fimse CondicionalSenao";
 
-        tabelaSintatica[13-3][10] = "lambda";
-        tabelaSintatica[17-3][10] = "lambda";
-        tabelaSintatica[20-3][10] = "lambda";
-        tabelaSintatica[21-3][10] = "lambda";
-        tabelaSintatica[22-3][10] = "lambda";
-        tabelaSintatica[24-3][10] = "lambda";
-        tabelaSintatica[25-3][10] = "lambda";
-        tabelaSintatica[26-3][10] = "lambda";
+        tabelaSintatica[13-3][10] = " ";
+        tabelaSintatica[17-3][10] = " ";
+        tabelaSintatica[20-3][10] = " ";
+        tabelaSintatica[21-3][10] = " ";
+        tabelaSintatica[22-3][10] = " ";
+        tabelaSintatica[24-3][10] = " ";
+        tabelaSintatica[25-3][10] = " ";
+        tabelaSintatica[26-3][10] = " ";
         tabelaSintatica[43-3][10] = "senao Comando fimsenao";
 
         tabelaSintatica[5-3][11] = "acenda lampada";
@@ -199,48 +292,48 @@ public class MainCompilador {
         tabelaSintatica[45-3][11] = "vire para Sentido";
         tabelaSintatica[46-3][11] = "Identificador";
 
-        tabelaSintatica[5-3][12] = "lambda";
-        tabelaSintatica[7-3][12] = "lambda";
-        tabelaSintatica[9-3][12] = "lambda";
-        tabelaSintatica[13-3][12] = "lambda";
-        tabelaSintatica[15-3][12] = "lambda";
-        tabelaSintatica[18-3][12] = "lambda";
-        tabelaSintatica[20-3][12] = "lambda";
-        tabelaSintatica[21-3][12] = "lambda";
-        tabelaSintatica[22-3][12] = "lambda";
-        tabelaSintatica[24-3][12] = "lambda";
-        tabelaSintatica[25-3][12] = "lambda";
-        tabelaSintatica[27-3][12] = "lambda";
-        tabelaSintatica[29-3][12] = "lambda";
-        tabelaSintatica[31-3][12] = "lambda";
-        tabelaSintatica[36-3][12] = "lambda";
-        tabelaSintatica[37-3][12] = "lambda";
-        tabelaSintatica[40-3][12] = "lambda";
-        tabelaSintatica[42-3][12] = "lambda";
-        tabelaSintatica[45-3][12] = "lambda";
-        tabelaSintatica[46-3][12] = "lambda";
+        tabelaSintatica[5-3][12] = " ";
+        tabelaSintatica[7-3][12] = " ";
+        tabelaSintatica[9-3][12] = " ";
+        tabelaSintatica[13-3][12] = " ";
+        tabelaSintatica[15-3][12] = " ";
+        tabelaSintatica[18-3][12] = " ";
+        tabelaSintatica[20-3][12] = " ";
+        tabelaSintatica[21-3][12] = " ";
+        tabelaSintatica[22-3][12] = " ";
+        tabelaSintatica[24-3][12] = " ";
+        tabelaSintatica[25-3][12] = " ";
+        tabelaSintatica[27-3][12] = " ";
+        tabelaSintatica[29-3][12] = " ";
+        tabelaSintatica[31-3][12] = " ";
+        tabelaSintatica[36-3][12] = " ";
+        tabelaSintatica[37-3][12] = " ";
+        tabelaSintatica[40-3][12] = " ";
+        tabelaSintatica[42-3][12] = " ";
+        tabelaSintatica[45-3][12] = " ";
+        tabelaSintatica[46-3][12] = " ";
         tabelaSintatica[47-3][12] = "Numero NumInstrucao";
 
-        tabelaSintatica[5-3][13] = "lambda";
-        tabelaSintatica[7-3][13] = "lambda";
-        tabelaSintatica[9-3][13] = "lambda";
-        tabelaSintatica[13-3][13] = "lambda";
-        tabelaSintatica[15-3][13] = "lambda";
-        tabelaSintatica[18-3][13] = "lambda";
-        tabelaSintatica[20-3][13] = "lambda";
-        tabelaSintatica[21-3][13] = "lambda";
-        tabelaSintatica[22-3][13] = "lambda";
-        tabelaSintatica[24-3][13] = "lambda";
-        tabelaSintatica[25-3][13] = "lambda";
-        tabelaSintatica[27-3][13] = "lambda";
-        tabelaSintatica[29-3][13] = "lambda";
-        tabelaSintatica[31-3][13] = "lambda";
-        tabelaSintatica[36-3][13] = "lambda";
+        tabelaSintatica[5-3][13] = " ";
+        tabelaSintatica[7-3][13] = " ";
+        tabelaSintatica[9-3][13] = " ";
+        tabelaSintatica[13-3][13] = " ";
+        tabelaSintatica[15-3][13] = " ";
+        tabelaSintatica[18-3][13] = " ";
+        tabelaSintatica[20-3][13] = " ";
+        tabelaSintatica[21-3][13] = " ";
+        tabelaSintatica[22-3][13] = " ";
+        tabelaSintatica[24-3][13] = " ";
+        tabelaSintatica[25-3][13] = " ";
+        tabelaSintatica[27-3][13] = " ";
+        tabelaSintatica[29-3][13] = " ";
+        tabelaSintatica[31-3][13] = " ";
+        tabelaSintatica[36-3][13] = " ";
         tabelaSintatica[37-3][13] = "passos";
-        tabelaSintatica[40-3][13] = "lambda";
-        tabelaSintatica[42-3][13] = "lambda";
-        tabelaSintatica[45-3][13] = "lambda";
-        tabelaSintatica[46-3][13] = "lambda";
+        tabelaSintatica[40-3][13] = " ";
+        tabelaSintatica[42-3][13] = " ";
+        tabelaSintatica[45-3][13] = " ";
+        tabelaSintatica[46-3][13] = " ";
 
         tabelaSintatica[14-3][14] = "direita robo bloqueada";
         tabelaSintatica[17-3][14] = "esquerda robo bloqueada";
@@ -260,77 +353,77 @@ public class MainCompilador {
         tabelaSintatica[17-3][17] = "Sentido";
         tabelaSintatica[28-3][17] = "frente";
 
-        tabelaSintatica[46-3][18] = "Letra LetraDigito";
+        tabelaSintatica[46-3][18] = "id";
 
-        tabelaSintatica[5-3][19] = "lambda";
-        tabelaSintatica[7-3][19] = "lambda";
-        tabelaSintatica[9-3][19] = "lambda";
-        tabelaSintatica[12-3][19] = "lambda";
-        tabelaSintatica[13-3][19] = "lambda";
-        tabelaSintatica[15-3][19] = "lambda";
-        tabelaSintatica[18-3][19] = "lambda";
-        tabelaSintatica[19-3][19] = "lambda";
-        tabelaSintatica[20-3][19] = "lambda";
-        tabelaSintatica[21-3][19] = "lambda";
-        tabelaSintatica[22-3][19] = "lambda";
-        tabelaSintatica[24-3][19] = "lambda";
-        tabelaSintatica[25-3][19] = "lambda";
-        tabelaSintatica[27-3][19] = "lambda";
-        tabelaSintatica[29-3][19] = "lambda";
-        tabelaSintatica[31-3][19] = "lambda";
-        tabelaSintatica[36-3][19] = "lambda";
-        tabelaSintatica[40-3][19] = "lambda";
-        tabelaSintatica[42-3][19] = "lambda";
-        tabelaSintatica[45-3][19] = "lambda";
+        tabelaSintatica[5-3][19] = " ";
+        tabelaSintatica[7-3][19] = " ";
+        tabelaSintatica[9-3][19] = " ";
+        tabelaSintatica[12-3][19] = " ";
+        tabelaSintatica[13-3][19] = " ";
+        tabelaSintatica[15-3][19] = " ";
+        tabelaSintatica[18-3][19] = " ";
+        tabelaSintatica[19-3][19] = " ";
+        tabelaSintatica[20-3][19] = " ";
+        tabelaSintatica[21-3][19] = " ";
+        tabelaSintatica[22-3][19] = " ";
+        tabelaSintatica[24-3][19] = " ";
+        tabelaSintatica[25-3][19] = " ";
+        tabelaSintatica[27-3][19] = " ";
+        tabelaSintatica[29-3][19] = " ";
+        tabelaSintatica[31-3][19] = " ";
+        tabelaSintatica[36-3][19] = " ";
+        tabelaSintatica[40-3][19] = " ";
+        tabelaSintatica[42-3][19] = " ";
+        tabelaSintatica[45-3][19] = " ";
         tabelaSintatica[46-3][19] = "Letra LetraDigito";
         tabelaSintatica[47-3][19] = "Digito LetraDigito";
 
-        tabelaSintatica[5-3][20] = "lambda";
-        tabelaSintatica[7-3][20] = "lambda";
-        tabelaSintatica[9-3][20] = "lambda";
-        tabelaSintatica[13-3][20] = "lambda";
-        tabelaSintatica[15-3][20] = "lambda";
-        tabelaSintatica[18-3][20] = "lambda";
-        tabelaSintatica[19-3][20] = "lambda";
-        tabelaSintatica[20-3][20] = "lambda";
-        tabelaSintatica[21-3][20] = "lambda";
-        tabelaSintatica[22-3][20] = "lambda";
-        tabelaSintatica[24-3][20] = "lambda";
-        tabelaSintatica[25-3][20] = "lambda";
-        tabelaSintatica[27-3][20] = "lambda";
-        tabelaSintatica[29-3][20] = "lambda";
-        tabelaSintatica[31-3][20] = "lambda";
-        tabelaSintatica[36-3][20] = "lambda";
-        tabelaSintatica[37-3][20] = "lambda";
-        tabelaSintatica[40-3][20] = "lambda";
-        tabelaSintatica[42-3][20] = "lambda";
-        tabelaSintatica[44-3][20] = "lambda";
-        tabelaSintatica[45-3][20] = "lambda";
-        tabelaSintatica[46-3][20] = "lambda";
-        tabelaSintatica[47-3][20] = "DigitoNum";
+        tabelaSintatica[5-3][20] = " ";
+        tabelaSintatica[7-3][20] = " ";
+        tabelaSintatica[9-3][20] = " ";
+        tabelaSintatica[13-3][20] = " ";
+        tabelaSintatica[15-3][20] = " ";
+        tabelaSintatica[18-3][20] = " ";
+        tabelaSintatica[19-3][20] = " ";
+        tabelaSintatica[20-3][20] = " ";
+        tabelaSintatica[21-3][20] = " ";
+        tabelaSintatica[22-3][20] = " ";
+        tabelaSintatica[24-3][20] = " ";
+        tabelaSintatica[25-3][20] = " ";
+        tabelaSintatica[27-3][20] = " ";
+        tabelaSintatica[29-3][20] = " ";
+        tabelaSintatica[31-3][20] = " ";
+        tabelaSintatica[36-3][20] = " ";
+        tabelaSintatica[37-3][20] = " ";
+        tabelaSintatica[40-3][20] = " ";
+        tabelaSintatica[42-3][20] = " ";
+        tabelaSintatica[44-3][20] = " ";
+        tabelaSintatica[45-3][20] = " ";
+        tabelaSintatica[46-3][20] = " ";
+        tabelaSintatica[47-3][20] = "num";
 
-        tabelaSintatica[5-3][21] = "lambda";
-        tabelaSintatica[7-3][21] = "lambda";
-        tabelaSintatica[9-3][21] = "lambda";
-        tabelaSintatica[13-3][21] = "lambda";
-        tabelaSintatica[15-3][21] = "lambda";
-        tabelaSintatica[18-3][21] = "lambda";
-        tabelaSintatica[19-3][21] = "lambda";
-        tabelaSintatica[20-3][21] = "lambda";
-        tabelaSintatica[21-3][21] = "lambda";
-        tabelaSintatica[22-3][21] = "lambda";
-        tabelaSintatica[24-3][21] = "lambda";
-        tabelaSintatica[25-3][21] = "lambda";
-        tabelaSintatica[27-3][21] = "lambda";
-        tabelaSintatica[29-3][21] = "lambda";
-        tabelaSintatica[31-3][21] = "lambda";
-        tabelaSintatica[36-3][21] = "lambda";
-        tabelaSintatica[37-3][21] = "lambda";
-        tabelaSintatica[40-3][21] = "lambda";
-        tabelaSintatica[42-3][21] = "lambda";
-        tabelaSintatica[44-3][21] = "lambda";
-        tabelaSintatica[45-3][21] = "lambda";
-        tabelaSintatica[46-3][21] = "lambda";
+        tabelaSintatica[5-3][21] = " ";
+        tabelaSintatica[7-3][21] = " ";
+        tabelaSintatica[9-3][21] = " ";
+        tabelaSintatica[13-3][21] = " ";
+        tabelaSintatica[15-3][21] = " ";
+        tabelaSintatica[18-3][21] = " ";
+        tabelaSintatica[19-3][21] = " ";
+        tabelaSintatica[20-3][21] = " ";
+        tabelaSintatica[21-3][21] = " ";
+        tabelaSintatica[22-3][21] = " ";
+        tabelaSintatica[24-3][21] = " ";
+        tabelaSintatica[25-3][21] = " ";
+        tabelaSintatica[27-3][21] = " ";
+        tabelaSintatica[29-3][21] = " ";
+        tabelaSintatica[31-3][21] = " ";
+        tabelaSintatica[36-3][21] = " ";
+        tabelaSintatica[37-3][21] = " ";
+        tabelaSintatica[40-3][21] = " ";
+        tabelaSintatica[42-3][21] = " ";
+        tabelaSintatica[44-3][21] = " ";
+        tabelaSintatica[45-3][21] = " ";
+        tabelaSintatica[46-3][21] = " ";
         tabelaSintatica[47-3][21] = "Digito DigitoNum";
 
         tabelaSintatica[46-3][22] = "A|a|B|b|...|Z|z";
@@ -341,12 +434,12 @@ public class MainCompilador {
         tabelaSintatica[17-3][24] = "esquerda";
 
         //testar:
-        for (int j = 0; j < 46; j++) {
+        /*for (int j = 0; j < 46; j++) {
             for (int k = 0; k < 25; k++) {
                 System.out.print(tabelaSintatica[j][k] + " | ");
             }
             System.out.println();
-        }
+        }*/
 
     }
 
@@ -439,7 +532,7 @@ public class MainCompilador {
                         }
                         // Verifica se é um número
                         else if (lexema.toString().matches("\\d+")) {
-                            Token token = new Token(lexema.toString(), "<numero, " + lexema.toString() + ">", linha, coluna);
+                            Token token = new Token(lexema.toString(), "NUM", linha, coluna);
                             tokenList.add(token);
                         }
                         // Caso contrário é um identificador
@@ -448,7 +541,7 @@ public class MainCompilador {
                             if (tokenString.matches("<identificador, >")) {
                                 continue;//token vazio (apenas com quebras) não inserido
                             }
-                            Token token = new Token(lexema.toString(), tokenString, linha, coluna);
+                            Token token = new Token(lexema.toString(), "ID", linha, coluna);
                             tokenList.add(token);
 
                             // Verifica se já existe na tabela de símbolos e insere caso contrário
@@ -512,13 +605,13 @@ public class MainCompilador {
                         }
                         // Verifica se é um número
                         else if (lexema.toString().matches("\\d+")) {
-                            Token token = new Token(lexema.toString(), "<numero, " + lexema.toString() + ">", linha, coluna);
+                            Token token = new Token(lexema.toString(), "NUM", linha, coluna);
                             tokenList.add(token);
                         }
                         // Caso contrário é um identificador
                         else {
                             String tokenString = "<identificador, " + lexema.toString() + ">";
-                            Token token = new Token(lexema.toString(), tokenString, linha, coluna);
+                            Token token = new Token(lexema.toString(), "ID", linha, coluna);
                             tokenList.add(token);
 
                             // Verifica se já existe na tabela de símbolos e insere caso contrário
@@ -582,13 +675,13 @@ public class MainCompilador {
                         }
                         // Verifica se é um número
                         else if (lexema.toString().matches("\\d+")) {
-                            Token token = new Token(lexema.toString(), "<numero, " + lexema.toString() + ">", linha, coluna);
+                            Token token = new Token(lexema.toString(), "NUM", linha, coluna);
                             tokenList.add(token);
                         }
                         // Caso contrário é um identificador
                         else {
                             String tokenString = "<identificador, " + lexema.toString() + ">";
-                            Token token = new Token(lexema.toString(), tokenString, linha, coluna);
+                            Token token = new Token(lexema.toString(), "ID", linha, coluna);
                             tokenList.add(token);
 
                             // Verifica se já existe na tabela de símbolos e insere caso contrário
