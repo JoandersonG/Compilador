@@ -2,7 +2,10 @@ import java.io.*;
 import java.util.*;
 
 public class MainCompilador {
+
+    private static String[][] tabelaSintatica;
     private static Map<String, String> errosTabela;
+
     public static void main(String[] args) {
 
         //é necessário um arquivo de entrada com o programa a ser compilado
@@ -10,11 +13,340 @@ public class MainCompilador {
             String path = "/home/joanderson/Coding/Compilador/src/inRobot.txt";
 
             List<Token> tokenTable = analiseLexica(path);
+            MainCompilador.popularTabelaSintatica();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+
+    }
+
+    private static void popularTabelaSintatica() {
+        tabelaSintatica = new String[46][25];
+        /*
+        String path = "/home/joanderson/Coding/Compilador/src/inTerminalsSintaticTable.txt";
+        Scanner sc = new Scanner(path);
+        int i=0;
+        while(sc.hasNextLine()) {
+            tabelaSintatica[i][0] = sc.nextLine();
+            i++;
+//            System.out.println(sc.nextLine());
+        }
+        //salvei todos os terminais
+        sc.close();
+        path = "/home/joanderson/Coding/Compilador/src/inNonTerminalsSintaticTable.txt";
+        sc = new Scanner(path);
+        i=0;
+        while(sc.hasNextLine()) {
+            tabelaSintatica[0][i] = sc.nextLine();
+            i++;
+            System.out.println("cont" + i);
+        }
+        sc.close();
+        //salvei os não-terminais
+         */
+
+        //Não-terminais:
+        tabelaSintatica[0][1] = "Programa";
+        tabelaSintatica[0][2] = "Declaracao";
+        tabelaSintatica[0][3] = "Bloco";
+        tabelaSintatica[0][4] = "ComandoMais";
+        tabelaSintatica[0][5] = "Comando";
+        tabelaSintatica[0][6] = "ComandoBloco";
+        tabelaSintatica[0][7] = "Iteracao";
+        tabelaSintatica[0][8] = "Laco";
+        tabelaSintatica[0][9] = "Condicional";
+        tabelaSintatica[0][10] = "CondicionalSenao";
+        tabelaSintatica[0][11] = "Instrucao";
+        tabelaSintatica[0][12] = "NumInstrucao";
+        tabelaSintatica[0][13] = "InstrucaoPassos";
+        tabelaSintatica[0][14] = "Condicao";
+        tabelaSintatica[0][15] = "EstadoLampada";
+        tabelaSintatica[0][16] = "EstadoRobo";
+        tabelaSintatica[0][17] = "LocalLampada";
+        tabelaSintatica[0][18] = "Identificador";
+        tabelaSintatica[0][19] = "LetraDigito";
+        tabelaSintatica[0][20] = "Numero";
+        tabelaSintatica[0][21] = "DigitoNum";
+        tabelaSintatica[0][22] = "Letra";
+        tabelaSintatica[0][23] = "Digito";
+        tabelaSintatica[0][24] = "Sentido";
+
+        //terminais:
+        tabelaSintatica[1][0] = "a";
+        tabelaSintatica[2][0] = "acenda";
+        tabelaSintatica[3][0] = "acesa";
+        tabelaSintatica[4][0] = "aguarde";
+        tabelaSintatica[5][0] = "apagada";
+        tabelaSintatica[6][0] = "apague";
+        tabelaSintatica[7][0] = "ate";
+        tabelaSintatica[8][0] = "bloqueada";
+        tabelaSintatica[9][0] = "como";
+        tabelaSintatica[10][0] = "definainstrucao";
+        tabelaSintatica[11][0] = "direita";
+        tabelaSintatica[12][0] = "enquanto";
+        tabelaSintatica[13][0] = "entao";
+        tabelaSintatica[14][0] = "esquerda";
+        tabelaSintatica[15][0] = "execucaoinicio";
+        tabelaSintatica[16][0] = "faca";
+        tabelaSintatica[17][0] = "fim";
+        tabelaSintatica[18][0] = "fimexecucao";
+        tabelaSintatica[19][0] = "fimpara";
+        tabelaSintatica[20][0] = "fimprograma";
+        tabelaSintatica[21][0] = "fimrepita";
+        tabelaSintatica[22][0] = "fimse";
+        tabelaSintatica[23][0] = "fimsenao";
+        tabelaSintatica[24][0] = "finalize";
+        tabelaSintatica[25][0] = "frente";
+        tabelaSintatica[26][0] = "inicio";
+        tabelaSintatica[27][0] = "lampada";
+        tabelaSintatica[28][0] = "mova";
+        tabelaSintatica[29][0] = "movimentando";
+        tabelaSintatica[30][0] = "ocupado";
+        tabelaSintatica[31][0] = "para";
+        tabelaSintatica[32][0] = "parado";
+        tabelaSintatica[33][0] = "pare";
+        tabelaSintatica[34][0] = "passos";
+        tabelaSintatica[35][0] = "programainicio";
+        tabelaSintatica[36][0] = "pronto";
+        tabelaSintatica[37][0] = "repita";
+        tabelaSintatica[38][0] = "robo";
+        tabelaSintatica[39][0] = "se";
+        tabelaSintatica[40][0] = "senao";
+        tabelaSintatica[41][0] = "vezes";
+        tabelaSintatica[42][0] = "vire";
+        tabelaSintatica[43][0] = "A|a|B|b|...|Z|z";
+        tabelaSintatica[44][0] = "0|...|9";
+        tabelaSintatica[45][0] = "$";
+
+
+
+
+
+
+
+        tabelaSintatica[38-3][1] = "programainicio Declaracao execucaoinicio Comando ComandoMais fimexecucao fimprograma";
+
+        tabelaSintatica[13-3][2] = "definainstrucao Identificador como Comando Declaracao";
+        tabelaSintatica[18-3][2] = "lambda";
+
+        tabelaSintatica[29-3][3] = "inicio ComandoBloco fim";
+
+        tabelaSintatica[5-3][4] = "Comando ComandoMais";
+        tabelaSintatica[7-3][4] = "Comando ComandoMais";
+        tabelaSintatica[9-3][4] = "Comando ComandoMais";
+        tabelaSintatica[15-3][4] = "Comando ComandoMais";
+        tabelaSintatica[21-3][4] = "lambda";
+        tabelaSintatica[27-3][4] = "Comando ComandoMais";
+        tabelaSintatica[29-3][4] = "Comando ComandoMais";
+        tabelaSintatica[31-3][4] = "Comando ComandoMais";
+        tabelaSintatica[36-3][4] = "Comando ComandoMais";
+        tabelaSintatica[40-3][4] = "Comando ComandoMais";
+        tabelaSintatica[42-3][4] = "Comando ComandoMais";
+        tabelaSintatica[45-3][4] = "Comando ComandoMais";
+        tabelaSintatica[46-3][4] = "Comando ComandoMais";
+
+        tabelaSintatica[5-3][5] = "Instrucao";
+        tabelaSintatica[7-3][5] = "Instrucao";
+        tabelaSintatica[9-3][5] = "Instrucao";
+        tabelaSintatica[15-3][5] = "Laco";
+        tabelaSintatica[27-3][5] = "Instrucao";
+        tabelaSintatica[29-3][5] = "Bloco";
+        tabelaSintatica[31-3][5] = "Instrucao";
+        tabelaSintatica[36-3][5] = "Instrucao";
+        tabelaSintatica[40-3][5] = "Iteracao";
+        tabelaSintatica[42-3][5] = "Condicional";
+        tabelaSintatica[45-3][5] = "Instrucao";
+        tabelaSintatica[46-3][5] = "Instrucao";
+
+        tabelaSintatica[5-3][6] = "Comando ComandoBloco";
+        tabelaSintatica[7-3][6] = "Comando ComandoBloco";
+        tabelaSintatica[9-3][6] = "Comando ComandoBloco";
+        tabelaSintatica[15-3][6] = "Comando ComandoBloco";
+        tabelaSintatica[20-3][6] = "lambda";
+        tabelaSintatica[27-3][6] = "Comando ComandoBloco";
+        tabelaSintatica[29-3][6] = "Comando ComandoBloco";
+        tabelaSintatica[31-3][6] = "Comando ComandoBloco";
+        tabelaSintatica[36-3][6] = "Comando ComandoBloco";
+        tabelaSintatica[40-3][6] = "Comando ComandoBloco";
+        tabelaSintatica[42-3][6] = "Comando ComandoBloco";
+        tabelaSintatica[45-3][6] = "Comando ComandoBloco";
+        tabelaSintatica[46-3][6] = "Comando ComandoBloco";
+
+        tabelaSintatica[40-3][7] = "repita Numero vezes Comando fimrepita";
+
+        tabelaSintatica[15-3][8] = "enquanto Condicao faca Comando fimpara";
+
+        tabelaSintatica[42-3][9] = "se Condicao faca Comando fimse CondicionalSenao";
+
+        tabelaSintatica[13-3][10] = "lambda";
+        tabelaSintatica[17-3][10] = "lambda";
+        tabelaSintatica[20-3][10] = "lambda";
+        tabelaSintatica[21-3][10] = "lambda";
+        tabelaSintatica[22-3][10] = "lambda";
+        tabelaSintatica[24-3][10] = "lambda";
+        tabelaSintatica[25-3][10] = "lambda";
+        tabelaSintatica[26-3][10] = "lambda";
+        tabelaSintatica[43-3][10] = "senao Comando fimsenao";
+
+        tabelaSintatica[5-3][11] = "acenda lampada";
+        tabelaSintatica[7-3][11] = "aguarde ate Condicao";
+        tabelaSintatica[9-3][11] = "apague lampada";
+        tabelaSintatica[27-3][11] = "finalize";
+        tabelaSintatica[31-3][11] = "mova NumInstrucao InstrucaoPassos";
+        tabelaSintatica[36-3][11] = "pare";
+        tabelaSintatica[45-3][11] = "vire para Sentido";
+        tabelaSintatica[46-3][11] = "Identificador";
+
+        tabelaSintatica[5-3][12] = "lambda";
+        tabelaSintatica[7-3][12] = "lambda";
+        tabelaSintatica[9-3][12] = "lambda";
+        tabelaSintatica[13-3][12] = "lambda";
+        tabelaSintatica[15-3][12] = "lambda";
+        tabelaSintatica[18-3][12] = "lambda";
+        tabelaSintatica[20-3][12] = "lambda";
+        tabelaSintatica[21-3][12] = "lambda";
+        tabelaSintatica[22-3][12] = "lambda";
+        tabelaSintatica[24-3][12] = "lambda";
+        tabelaSintatica[25-3][12] = "lambda";
+        tabelaSintatica[27-3][12] = "lambda";
+        tabelaSintatica[29-3][12] = "lambda";
+        tabelaSintatica[31-3][12] = "lambda";
+        tabelaSintatica[36-3][12] = "lambda";
+        tabelaSintatica[37-3][12] = "lambda";
+        tabelaSintatica[40-3][12] = "lambda";
+        tabelaSintatica[42-3][12] = "lambda";
+        tabelaSintatica[45-3][12] = "lambda";
+        tabelaSintatica[46-3][12] = "lambda";
+        tabelaSintatica[47-3][12] = "Numero NumInstrucao";
+
+        tabelaSintatica[5-3][13] = "lambda";
+        tabelaSintatica[7-3][13] = "lambda";
+        tabelaSintatica[9-3][13] = "lambda";
+        tabelaSintatica[13-3][13] = "lambda";
+        tabelaSintatica[15-3][13] = "lambda";
+        tabelaSintatica[18-3][13] = "lambda";
+        tabelaSintatica[20-3][13] = "lambda";
+        tabelaSintatica[21-3][13] = "lambda";
+        tabelaSintatica[22-3][13] = "lambda";
+        tabelaSintatica[24-3][13] = "lambda";
+        tabelaSintatica[25-3][13] = "lambda";
+        tabelaSintatica[27-3][13] = "lambda";
+        tabelaSintatica[29-3][13] = "lambda";
+        tabelaSintatica[31-3][13] = "lambda";
+        tabelaSintatica[36-3][13] = "lambda";
+        tabelaSintatica[37-3][13] = "passos";
+        tabelaSintatica[40-3][13] = "lambda";
+        tabelaSintatica[42-3][13] = "lambda";
+        tabelaSintatica[45-3][13] = "lambda";
+        tabelaSintatica[46-3][13] = "lambda";
+
+        tabelaSintatica[14-3][14] = "direita robo bloqueada";
+        tabelaSintatica[17-3][14] = "esquerda robo bloqueada";
+        tabelaSintatica[28-3][14] = "frente robo bloqueada";
+        tabelaSintatica[30-3][14] = "lampada EstadoLampada a LocalLampada";
+        tabelaSintatica[41-3][14] = "robo EstadoRobo";
+
+        tabelaSintatica[6-3][15] = "acesa";
+        tabelaSintatica[8-3][15] = "apagada";
+
+        tabelaSintatica[32-3][16] = "movimentando";
+        tabelaSintatica[33-3][16] = "ocupado";
+        tabelaSintatica[35-3][16] = "parado";
+        tabelaSintatica[39-3][16] = "pronto";
+
+        tabelaSintatica[14-3][17] = "Sentido";
+        tabelaSintatica[17-3][17] = "Sentido";
+        tabelaSintatica[28-3][17] = "frente";
+
+        tabelaSintatica[46-3][18] = "Letra LetraDigito";
+
+        tabelaSintatica[5-3][19] = "lambda";
+        tabelaSintatica[7-3][19] = "lambda";
+        tabelaSintatica[9-3][19] = "lambda";
+        tabelaSintatica[12-3][19] = "lambda";
+        tabelaSintatica[13-3][19] = "lambda";
+        tabelaSintatica[15-3][19] = "lambda";
+        tabelaSintatica[18-3][19] = "lambda";
+        tabelaSintatica[19-3][19] = "lambda";
+        tabelaSintatica[20-3][19] = "lambda";
+        tabelaSintatica[21-3][19] = "lambda";
+        tabelaSintatica[22-3][19] = "lambda";
+        tabelaSintatica[24-3][19] = "lambda";
+        tabelaSintatica[25-3][19] = "lambda";
+        tabelaSintatica[27-3][19] = "lambda";
+        tabelaSintatica[29-3][19] = "lambda";
+        tabelaSintatica[31-3][19] = "lambda";
+        tabelaSintatica[36-3][19] = "lambda";
+        tabelaSintatica[40-3][19] = "lambda";
+        tabelaSintatica[42-3][19] = "lambda";
+        tabelaSintatica[45-3][19] = "lambda";
+        tabelaSintatica[46-3][19] = "Letra LetraDigito";
+        tabelaSintatica[47-3][19] = "Digito LetraDigito";
+
+        tabelaSintatica[5-3][20] = "lambda";
+        tabelaSintatica[7-3][20] = "lambda";
+        tabelaSintatica[9-3][20] = "lambda";
+        tabelaSintatica[13-3][20] = "lambda";
+        tabelaSintatica[15-3][20] = "lambda";
+        tabelaSintatica[18-3][20] = "lambda";
+        tabelaSintatica[19-3][20] = "lambda";
+        tabelaSintatica[20-3][20] = "lambda";
+        tabelaSintatica[21-3][20] = "lambda";
+        tabelaSintatica[22-3][20] = "lambda";
+        tabelaSintatica[24-3][20] = "lambda";
+        tabelaSintatica[25-3][20] = "lambda";
+        tabelaSintatica[27-3][20] = "lambda";
+        tabelaSintatica[29-3][20] = "lambda";
+        tabelaSintatica[31-3][20] = "lambda";
+        tabelaSintatica[36-3][20] = "lambda";
+        tabelaSintatica[37-3][20] = "lambda";
+        tabelaSintatica[40-3][20] = "lambda";
+        tabelaSintatica[42-3][20] = "lambda";
+        tabelaSintatica[44-3][20] = "lambda";
+        tabelaSintatica[45-3][20] = "lambda";
+        tabelaSintatica[46-3][20] = "lambda";
+        tabelaSintatica[47-3][20] = "DigitoNum";
+
+        tabelaSintatica[5-3][21] = "lambda";
+        tabelaSintatica[7-3][21] = "lambda";
+        tabelaSintatica[9-3][21] = "lambda";
+        tabelaSintatica[13-3][21] = "lambda";
+        tabelaSintatica[15-3][21] = "lambda";
+        tabelaSintatica[18-3][21] = "lambda";
+        tabelaSintatica[19-3][21] = "lambda";
+        tabelaSintatica[20-3][21] = "lambda";
+        tabelaSintatica[21-3][21] = "lambda";
+        tabelaSintatica[22-3][21] = "lambda";
+        tabelaSintatica[24-3][21] = "lambda";
+        tabelaSintatica[25-3][21] = "lambda";
+        tabelaSintatica[27-3][21] = "lambda";
+        tabelaSintatica[29-3][21] = "lambda";
+        tabelaSintatica[31-3][21] = "lambda";
+        tabelaSintatica[36-3][21] = "lambda";
+        tabelaSintatica[37-3][21] = "lambda";
+        tabelaSintatica[40-3][21] = "lambda";
+        tabelaSintatica[42-3][21] = "lambda";
+        tabelaSintatica[44-3][21] = "lambda";
+        tabelaSintatica[45-3][21] = "lambda";
+        tabelaSintatica[46-3][21] = "lambda";
+        tabelaSintatica[47-3][21] = "Digito DigitoNum";
+
+        tabelaSintatica[46-3][22] = "A|a|B|b|...|Z|z";
+
+        tabelaSintatica[46-3][23] = "0|...|9";
+
+        tabelaSintatica[14-3][24] = "direita";
+        tabelaSintatica[17-3][24] = "esquerda";
+
+        //testar:
+        for (int j = 0; j < 46; j++) {
+            for (int k = 0; k < 25; k++) {
+                System.out.print(tabelaSintatica[j][k] + " | ");
+            }
+            System.out.println();
+        }
 
     }
 
