@@ -2,11 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f757df5c-dd38-4f91-bc64-29d089c9b3da" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/NonTerminals/Bloco.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/NonTerminals/Comando.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/NonTerminals/ComandoBloco.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/NonTerminals/ComandoMais.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/NonTerminals/Condicao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/NonTerminals/Condicional.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/NonTerminals/CondicionalSenao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/NonTerminals/Declaracao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/NonTerminals/Digito.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/NonTerminals/DigitoNum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/NonTerminals/EstadoLampada.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/NonTerminals/EstadoRobo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/NonTerminals/Identificador.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/NonTerminals/Instrucao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/NonTerminals/InstrucaoPassos.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/NonTerminals/Iteracao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/NonTerminals/Laco.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/NonTerminals/Letra.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/NonTerminals/LetraDigito.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/NonTerminals/LocalLampada.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/NonTerminals/NumInstrucao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/NonTerminals/Numero.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/NonTerminals/Programa.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/NonTerminals/Sentido.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Compilador/MainCompilador.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compilador/MainCompilador.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Compilador/inRobot.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compilador/inRobot.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MainCompilador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainCompilador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/inRobot.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/inRobot.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,53 +39,14 @@
     <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Erro.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="13" selection-start-column="13" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/LinhaAutomato.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="13" selection-start-column="13" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/MainCompilador.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="231" column="38" lean-forward="true" selection-start-line="231" selection-start-column="38" selection-end-line="231" selection-end-column="38" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/TabelaReservada.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Token.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="29" lean-forward="true" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -82,19 +63,49 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/MainCompilador.java" />
+        <option value="$PROJECT_DIR$/src/NonTerminals/Programa.java" />
+        <option value="$PROJECT_DIR$/src/NonTerminals/Bloco.java" />
+        <option value="$PROJECT_DIR$/src/NonTerminals/Comando.java" />
+        <option value="$PROJECT_DIR$/src/NonTerminals/Iteracao.java" />
+        <option value="$PROJECT_DIR$/src/NonTerminals/Laco.java" />
+        <option value="$PROJECT_DIR$/src/NonTerminals/Condicional.java" />
+        <option value="$PROJECT_DIR$/src/NonTerminals/CondicionalSenao.java" />
+        <option value="$PROJECT_DIR$/src/NonTerminals/Declaracao.java" />
+        <option value="$PROJECT_DIR$/src/NonTerminals/ComandoBloco.java" />
+        <option value="$PROJECT_DIR$/src/NonTerminals/ComandoMais1.java" />
+        <option value="$PROJECT_DIR$/src/NonTerminals/ComandoMais2.java" />
+        <option value="$PROJECT_DIR$/src/NonTerminals/ComandoMais.java" />
+        <option value="$PROJECT_DIR$/src/NonTerminals/NumInstrucao.java" />
+        <option value="$PROJECT_DIR$/src/NonTerminals/Instrucao.java" />
+        <option value="$PROJECT_DIR$/src/NonTerminals/InstrucaoPassos.java" />
+        <option value="$PROJECT_DIR$/src/NonTerminals/Condicao.java" />
+        <option value="$PROJECT_DIR$/src/NonTerminals/EstadoLampada.java" />
+        <option value="$PROJECT_DIR$/src/NonTerminals/EstadoRobo.java" />
+        <option value="$PROJECT_DIR$/src/NonTerminals/LocalLampada.java" />
+        <option value="$PROJECT_DIR$/src/NonTerminals/Identificador.java" />
+        <option value="$PROJECT_DIR$/src/NonTerminals/LetraDigito.java" />
+        <option value="$PROJECT_DIR$/src/NonTerminals/Numero.java" />
+        <option value="$PROJECT_DIR$/src/NonTerminals/DigitoNum.java" />
+        <option value="$PROJECT_DIR$/src/NonTerminals/Letra.java" />
+        <option value="$PROJECT_DIR$/src/NonTerminals/Digito.java" />
+        <option value="$PROJECT_DIR$/src/NonTerminals/Sentido.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="1650" />
     <option name="width" value="1363" />
     <option name="height" value="1080" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -107,11 +118,17 @@
               <item name="Compilador" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Compilador" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Compilador" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="NonTerminals" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -157,10 +174,9 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1363" height="1080" extended-state="0" />
-    <editor active="true" />
+    <frame x="1919" y="-1" width="1368" height="770" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23422053" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23712121" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -216,14 +232,196 @@
     <entry file="file://$PROJECT_DIR$/src/Token.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
-          <caret line="10" column="29" lean-forward="true" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+          <caret line="10" column="29" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MainCompilador.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="231" column="38" lean-forward="true" selection-start-line="231" selection-start-column="38" selection-end-line="231" selection-end-column="38" />
+        <state relative-caret-position="3480">
+          <caret line="233" lean-forward="true" selection-start-line="233" selection-end-line="233" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NonTerminals/Programa.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="36" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NonTerminals/Bloco.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="38" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NonTerminals/Iteracao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="28" selection-start-line="4" selection-start-column="28" selection-end-line="4" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NonTerminals/Laco.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="28" selection-start-line="4" selection-start-column="28" selection-end-line="4" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NonTerminals/Condicional.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="45" selection-start-line="5" selection-start-column="45" selection-end-line="5" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NonTerminals/ComandoBloco.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="27" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NonTerminals/ComandoMais2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NonTerminals/ComandoMais1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="4" lean-forward="true" selection-start-line="3" selection-start-column="4" selection-end-line="4" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NonTerminals/ComandoMais.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="27" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NonTerminals/Comando.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NonTerminals/Declaracao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="27" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NonTerminals/CondicionalSenao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="27" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NonTerminals/NumInstrucao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="8" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NonTerminals/Instrucao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NonTerminals/Condicao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="38" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NonTerminals/EstadoLampada.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NonTerminals/Sentido.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="23" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NonTerminals/Digito.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NonTerminals/Letra.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="23" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NonTerminals/DigitoNum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="27" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NonTerminals/Numero.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="11" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NonTerminals/LetraDigito.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="27" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NonTerminals/Identificador.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="36" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NonTerminals/LocalLampada.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="28" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NonTerminals/EstadoRobo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="29" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NonTerminals/InstrucaoPassos.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="27" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
         </state>
       </provider>
     </entry>
