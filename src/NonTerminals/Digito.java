@@ -1,5 +1,5 @@
 package NonTerminals;
 
-public class Digito {
+public class Digito  extends No{
     //0,...,9
 }

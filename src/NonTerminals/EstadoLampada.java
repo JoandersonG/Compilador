@@ -1,6 +1,6 @@
 package NonTerminals;
 
-public class EstadoLampada {
+public class EstadoLampada  extends No{
     //acesa
     //apagada
 }

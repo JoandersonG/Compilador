@@ -1,6 +1,6 @@
 package NonTerminals;
 
-public class Condicao {
+public class Condicao  extends No{
 
     private EstadoRobo estadoRobo;
     //prod 2,3,4 não têm não-term

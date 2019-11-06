@@ -1,4 +1,23 @@
 public class Token {
+    private String prox;
+    private String atual;
+
+    public String getAtual() {
+        return atual;
+    }
+
+    public void setAtual(String atual) {
+        this.atual = atual;
+    }
+
+    public String getProx() {
+        return prox;
+    }
+
+    public void setProx(String prox) {
+        this.prox = prox;
+    }
+
     private String lexema;
     private String token;
     private int linha;

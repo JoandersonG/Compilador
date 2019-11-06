@@ -1,5 +1,5 @@
 package NonTerminals;
 
-public class Numero {
+public class Numero  extends No{
     private DigitoNum digitoNum;
 }

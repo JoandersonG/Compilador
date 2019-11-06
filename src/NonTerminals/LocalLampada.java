@@ -1,6 +1,6 @@
 package NonTerminals;
 
-public class LocalLampada {
+public class LocalLampada  extends No{
     //frente
     //ou
     private Sentido sentido;

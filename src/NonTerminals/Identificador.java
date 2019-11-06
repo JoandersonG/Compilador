@@ -1,6 +1,6 @@
 package NonTerminals;
 
-public class Identificador {
+public class Identificador  extends No{
     private Letra letra;
     private LetraDigito letraDigito;
 }

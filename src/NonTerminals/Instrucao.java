@@ -1,6 +1,6 @@
 package NonTerminals;
 
-public class Instrucao {
+public class Instrucao  extends No{
     //produção 1:
     private NumInstrucao numInstrucao;
     private InstrucaoPassos instrucaoPassos;
