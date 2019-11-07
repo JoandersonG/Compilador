@@ -4,8 +4,9 @@ public class Bloco extends No{
     private int comandoBloco = -1;
 
     @Override
-    public void addNo(int posicaoNoArrayTree, String classe) {
+    public boolean addNo(int posicaoNoArrayTree, String classe) {
         comandoBloco = posicaoNoArrayTree;
+        return true;
     }
 
     @Override

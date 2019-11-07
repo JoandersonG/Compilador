@@ -1,24 +1,32 @@
 package NonTerminals;
 
 public class ComandoMais  extends No{
-    private Comando comando;
-    private ComandoMais comandoMais;
+    private int comando = -1;
+    private int comandoMais = -1;
     private boolean lambda;
 
-    public Comando getComando() {
-        return comando;
+    @Override
+    public boolean addNo(int posicaoNoArrayTree, String classe) {
+        if (comando == -1 && classe.equals("COMANDO")) {
+            comando = posicaoNoArrayTree;
+        }
+        else if (comandoMais == -1 && classe.equals("COMANDOMAIS")) {
+            comandoMais = posicaoNoArrayTree;
+        }
+        else {
+            lambda = true;//isso está errado.
+            return false;
+            //todo: como descobrir se é lambda ou outra produção?
+        }
+        return true;
     }
 
-    public void setComando(Comando comando) {
-        this.comando = comando;
-    }
-
-    public ComandoMais getComandoMais() {
-        return comandoMais;
-    }
-
-    public void setComandoMais(ComandoMais comandoMais) {
-        this.comandoMais = comandoMais;
+    @Override
+    public boolean temCampoVazio() {
+        if (lambda) return false;
+        if (comando == -1) return true;
+        if (comandoMais == -1) return true;
+        return false;
     }
 
     public boolean isLambda() {

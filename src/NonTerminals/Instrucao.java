@@ -11,4 +11,14 @@ public class Instrucao  extends No{
     // prod 4,5,6,7 não têm não terminais
     //prod 8:
     private Condicao condicao;
+
+    @Override
+    public boolean addNo(int posicaoNoArrayTree, String classe) {
+        return false;
+    }
+
+    @Override
+    public boolean temCampoVazio() {
+        return false;
+    }
 }

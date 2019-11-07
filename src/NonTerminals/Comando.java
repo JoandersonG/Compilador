@@ -11,7 +11,7 @@ public class Comando  extends No{
     private int instrucao = -1;
 
     @Override
-    public void addNo(int posicaoNoArrayTree, String classe) {
+    public boolean addNo(int posicaoNoArrayTree, String classe) {
         if (classe.equals("BLOCO")) {
             bloco = posicaoNoArrayTree;
         }
@@ -27,6 +27,7 @@ public class Comando  extends No{
         else if (classe.equals("INSTRUCAO")) {
             instrucao = posicaoNoArrayTree;
         }
+        return true;
     }
 
     @Override

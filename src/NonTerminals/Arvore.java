@@ -17,7 +17,13 @@ public class Arvore {
             tree.add(new Programa());
             proximoNoComCampoVazio = 0;
         }
-        tree.get(proximoNoComCampoVazio).addNo(tree.size(),classe);
+        boolean result = tree.get(proximoNoComCampoVazio).addNo(tree.size(),classe);
+        if (!result) {
+            //não adicionou pq result é lambda.
+            while (!tree.get(proximoNoComCampoVazio).temCampoVazio()){
+                proximoNoComCampoVazio++;
+            }
+        }
         if(!tree.get(proximoNoComCampoVazio).temCampoVazio()) {
             proximoNoComCampoVazio++; //isso está certo?
         }

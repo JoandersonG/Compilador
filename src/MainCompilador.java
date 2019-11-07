@@ -1,6 +1,3 @@
-import NonTerminals.SimboloPilha;
-import com.sun.org.apache.bcel.internal.generic.RET;
-
 import java.io.*;
 import java.util.*;
 
@@ -38,10 +35,9 @@ public class MainCompilador {
         }
     }
 
-    private static boolean isTerminal(SimboloPilha simbolo) {
-
+    private static boolean isTerminal(String simbolo) {
         for (int i = 0; i < 46; i++) {
-            if (tabelaSintatica[i][0]!=null && tabelaSintatica[i][0].equals(simbolo.getValorReal())) {
+            if (tabelaSintatica[i][0]!=null && tabelaSintatica[i][0].equals(simbolo)) {
                 return true;
             }
         }
@@ -73,104 +69,35 @@ public class MainCompilador {
 
 
     private static void analiseSintatica(List<Token> cadeiaTokens) {
-        //crio a pilha para análise semantica:
-        //Stack<String> pilhaSemantica = new Stack<>();
-
         //coloco $ no fim da cadeia:
         cadeiaTokens.add(new Token("$","$",cadeiaTokens.size(),0));
         //crio a pilha:
-        Stack<SimboloPilha> pilha = new Stack<>();
+        Stack<String> pilha = new Stack<>();
         //adiciono $ na pilha:
-        pilha.push(new SimboloPilha("$"));
+        pilha.push("$");
         //adiciono o símbolo inicial da gramática:
-        pilha.push(new SimboloPilha(tabelaSintatica[0][1]));
+        pilha.push(tabelaSintatica[0][1]);
         int ponteiroCadeia = 0;
 
-        SimboloPilha topoPilha;
-        Token simboloAtual = null, simboloAnterior= null;
-        String anterior = null;
+        String topoPilha;
+        Token simboloAtual;
+        //todo: converter em maiúsculo a tabela sintática
         do {
             topoPilha = pilha.peek();
-            simboloAnterior = simboloAtual;
             simboloAtual = cadeiaTokens.get(ponteiroCadeia);
-
-            if(topoPilha.getAtual() != null && !topoPilha.getAtual().equals(topoPilha.getValorReal())) {
-                //ERRO!
-                System.out.println("Erro: simbolo atual não é oq deveria ser");
-                return;
-            }
-            if (simboloAtual.getToken().equals("MOVA")) {
-                //simboloAtual.setProx("AGUARDE ATE ROBO PRONTO");
-                topoPilha.setProx("AGUARDE ATE ROBO PRONTO");
-                pilha.pop();
-                pilha.push(topoPilha);
-            }
-//
-//            if (simboloAnterior != null && simboloAnterior.getProx() != null) {
-//
-//
-//                if (simboloAnterior.getProx().matches(simboloAtual.getToken() + ".*")) {
-//                    //estou no caminho certo
-//                    simboloAtual.setProx(simboloAnterior.getProx().substring(simboloAtual.getToken().length(), simboloAnterior.getProx().length()));
-//                } else {
-//                    //tem um erro em necessidades para o futuro
-//                    System.out.println("Erro em necessidades para o futuro");
-//                    System.out.println("Linha: " + simboloAtual.getLinha() + " Coluna: " + simboloAtual.getColuna());
-//                    return;
-//                }
-//            }
             //se topoPilha for terminal ou $:
-            if (isTerminal(topoPilha) || topoPilha.getValorReal().equals("$")) {
-                if (topoPilha.getValorReal().equals(simboloAtual.getToken())) {
-//                    if (!pilhaSemantica.isEmpty()) {
-//                        if (topoPilha.equals(pilhaSemantica.peek())) {
-//                            pilhaSemantica.pop();
-//                        }
-//                        else {
-//                            System.out.println("Erro 3: erro semântico em " + simboloAtual.getToken());
-//                            System.out.println("Linha: " + simboloAtual.getLinha() + " Coluna: " + simboloAtual.getColuna());
-//                            break;
-//                        }
-//                    }
-//
-//                    if (!matching.isEmpty()) {
-//                        for (String m : matching) {
-//                            if (!m.equals(topoPilha))
-//                        }
-//                    }
-
-
-
+            if (isTerminal(topoPilha) || topoPilha.equals("$")) {
+                if (topoPilha.equals(simboloAtual.getToken())) {//lexema ou token?
                     pilha.pop();
                     ponteiroCadeia++;
-
-                    if (topoPilha.getAtual() != null) {
-                        SimboloPilha aux = pilha.peek();
-                        if (!topoPilha.getAtual().matches(simboloAtual.getToken() + ".*")) {
-                            System.out.println("Erro: num 10");
-                        }
-                        else{
-
-                            aux.setProx(topoPilha.getAtual().substring(simboloAtual.getToken().length()-1));//tá certo isso?
-
-                        }
-                        pilha.pop();
-                        pilha.push(aux);
-                    }
-                    else {
-
-                    }
                 }
                 else{
                     System.out.println("Erro 1 em " + simboloAtual.getToken() + " comparado com " + topoPilha);
-                    System.out.println("Linha: " + simboloAtual.getLinha() + " Coluna: " + simboloAtual.getColuna());
+                    System.out.println("Linha: " + simboloAtual.getLinha() + "Coluna: " + simboloAtual.getColuna());
                     return;
                 }
             }
             else {//topoPilha é um não-terminal
-
-
-
                 //se existe na tabela sintática uma regra de topoPilha::=simboloAtual alguma outra coisa
                 String ladoDireito = getLadoDireitoRegra(topoPilha,simboloAtual.getToken());
                 if (ladoDireito != null) {
@@ -180,142 +107,16 @@ public class MainCompilador {
                     for (int i = ladoDireitoStrings.length-1; i >= 0; i--) {
                         pilha.push(ladoDireitoStrings[i]);
                     }
-//
-//                    if (anterior != null && anterior.matches("MOVA .*")) {
-//                        //TESTO SE ATUAL PODE RESULTAR EVENTUALMENTE NUM AGUARDE ATE....
-//                        if (ladoDireito.matches("COMANDO|INSTRUCAO|AGUARDE ATE CONDICAO")) {
-//                            //TUDO CERTO
-//                        }
-//                        else {
-//                            System.out.println("Erro!!! necessária instrução \"aguarde até robo pronto\"");
-//                            System.out.println("Linha: " + simboloAtual.getLinha() + " Coluna: " + simboloAtual.getColuna());
-//                            return;
-//                        }
-//                    }
-
-                    if(ladoDireito.matches("MOVA .*")) {
-                        //próxima intrução deve ser "AGUARDE ATE ROBO PRONTO"
-                        //anterior = ladoDireito;
-                        simboloAtual.setProx("AGUARDE ATE ROBO PRONTO");
-
-
-                        matching.add("AGUARDE");
-                        matching.add("ATE");
-                        matching.add("ROBO");
-                        matching.add("PRONTO");
-                    }
-/*
-
-                    if (pilhaSemantica.isEmpty()) {
-                        //é ativador?:
-                        if(ladoDireito.matches("MOVA .*")) {
-                            pilhaSemantica.push("PRONTO");
-                            pilhaSemantica.push("ROBO");
-                            pilhaSemantica.push("ATE");
-                            pilhaSemantica.push("AGUARDE");
-                            for (int i = ladoDireitoStrings.length-1; i >= 0; i--) {
-                                pilhaSemantica.push(ladoDireitoStrings[i]);
-                            }
-                        }
-
-                    }
-                    else {
-                        //pilhaSemantica não é vazia
-                        pilhaSemantica.pop();
-                        if(ladoDireito.matches("MOVA .*")) {
-                            pilhaSemantica.push("PRONTO");
-                            pilhaSemantica.push("ROBO");
-                            pilhaSemantica.push("ATE");
-                            pilhaSemantica.push("AGUARDE");
-                            for (int i = ladoDireitoStrings.length-1; i >= 0; i--) {
-                                pilhaSemantica.push(ladoDireitoStrings[i]);
-                            }
-                        }
-                        else {
-                            for (int i = ladoDireitoStrings.length-1; i >= 0; i--) {
-                                pilhaSemantica.push(ladoDireitoStrings[i]);
-                            }
-                        }
-                    }
-
-
-                    /*
-
-
-                    if (!pilhaSemantica.isEmpty()) {
-                        for (int i = ladoDireitoStrings.length-1; i >= 0; i--) {
-                            pilhaSemantica.push(ladoDireitoStrings[i]);
-                        }
-                    }
-
-                    else if(ladoDireito.matches("mova .* ")) {
-                        pilhaSemantica.push("pronto");
-                        pilhaSemantica.push("robo");
-                        pilhaSemantica.push("ate");
-                        pilhaSemantica.push("aguarde");
-                        for (int i = ladoDireitoStrings.length-1; i >= 0; i--) {
-                            pilhaSemantica.push(ladoDireitoStrings[i]);
-                        }
-                    }
-
-
-
-                    //semântica:
-                    /*
-
-                    if (!pilhaSemantica.empty()) {
-                        if (pilhaSemantica.peek().equals("VIRE PARA ESQUERDA")) {
-                            if (ladoDireito.equals("VIRE PARA DIREITA")) {
-                                System.out.println("Erro semântico: vire para esq/dir");
-                                return;
-                            }
-                        }
-
-                        else if (pilhaSemantica.peek().equals("VIRE PARA DIREITA")) {
-                            if (ladoDireito.equals("VIRE PARA ESQUERDA")) {
-                                System.out.println("Erro semântico: vire para DIR/ESQ");
-                                return;
-                            }
-                        }
-
-                        else if (pilhaSemantica.peek().matches("MOVA .* VEZES")) {
-                            if (!ladoDireito.equals("AGUARDE ATE ROBO PRONTO")) {
-                                System.out.println("Erro semântico: aguarde até");
-                                return;
-                            }
-                        }
-
-                        else {
-                            //nenhum caso especial:
-                            pilhaSemantica.pop();
-                        }
-
-                    } else {
-                        //pilhaSemantica vazia
-                        if ((ladoDireito.matches("MOVA .* VEZES")) || ladoDireito.matches("VIRE PARA .*")) {
-                            pilhaSemantica.push(ladoDireito);
-                        }
-                    }
-for (int i = ladoDireitoStrings.length-1; i >= 0; i--) {
-                        pilha.push(ladoDireitoStrings[i]);
-                    }
-                     */
-
-
                 }
                 else {
                     System.out.println("Erro 2 em " + simboloAtual.getToken() + " comparado com " + topoPilha);
                     System.out.println("Linha: " + simboloAtual.getLinha() + " Coluna: " + simboloAtual.getColuna());
                     return;
                 }
-
             }
         }
         while(!(topoPilha.equals(simboloAtual.getToken()) && pilha.peek().equals("$")));
         System.out.println("Análise sintática: tudo certo!!");
-//        for (int i = 0; i < pilhaSemantica.size(); i++) {
-//            System.out.println(pilhaSemantica.pop());
-//        }
 
     }
 

@@ -12,7 +12,7 @@ public abstract class No {
         isVazia = vazia;
     }
 
-    public abstract void addNo(int posicaoNoArrayTree, String classe);
+    public abstract boolean addNo(int posicaoNoArrayTree, String classe);
 
     public abstract boolean temCampoVazio();
 

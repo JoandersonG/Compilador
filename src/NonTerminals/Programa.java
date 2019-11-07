@@ -46,7 +46,7 @@ public class Programa extends No{
     }*/
 
     @Override
-    public void addNo(int posicaoNoArrayTree) {
+    public boolean addNo(int posicaoNoArrayTree, String Classe) {
         if (declaracao == -1) {
             declaracao = posicaoNoArrayTree;
         }
@@ -56,6 +56,7 @@ public class Programa extends No{
         else {
             comandoMais = posicaoNoArrayTree;
         }
+        return true;
     }
 
     @Override
