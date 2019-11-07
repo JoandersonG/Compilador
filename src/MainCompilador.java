@@ -67,6 +67,32 @@ public class MainCompilador {
         return tabelaSintatica[linha][coluna];
     }
 
+    private static String primeiraProducaoDeNaoTerminal(String naoTerminal) {
+        if (naoTerminal == null) return null;
+        int coluna = -1;
+        for (int j = 1; j < 25; j++) {
+            if (tabelaSintatica[0][j].equals(naoTerminal)) {
+                coluna = j;
+                break;
+            }
+        }
+        if (coluna == -1) {
+            return null;
+        }
+        for (int i = 1; i < 46; i++) {
+            if (tabelaSintatica[i][coluna] != null) {
+                String[] split = tabelaSintatica[i][coluna].split(" ");
+                if (isTerminal(split[0])) {
+                    return split[0];
+                }
+                else {
+                    return primeiraProducaoDeNaoTerminal(split[0]);
+                }
+            }
+        }
+        return null;
+    }
+
 
     private static void analiseSintatica(List<Token> cadeiaTokens) {
         //coloco $ no fim da cadeia:
@@ -92,8 +118,10 @@ public class MainCompilador {
                     ponteiroCadeia++;
                 }
                 else{
-                    System.out.println("Erro 1 em " + simboloAtual.getToken() + " comparado com " + topoPilha);
-                    System.out.println("Linha: " + simboloAtual.getLinha() + "Coluna: " + simboloAtual.getColuna());
+                    //System.out.println("Erro 1 em " + simboloAtual.getToken() + " comparado com " + topoPilha);
+                    //System.out.println("Erro: esperado " + simboloAtual.getToken() + ", mas obtido " + topoPilha);
+                    System.out.println("Erro na linha " + simboloAtual.getLinha() + ", coluna " + simboloAtual.getColuna() + ": \"" + topoPilha.toLowerCase() + "\" era esperado");
+                    //System.out.println("Linha: " + simboloAtual.getLinha() + "Coluna: " + simboloAtual.getColuna());
                     return;
                 }
             }
@@ -109,8 +137,9 @@ public class MainCompilador {
                     }
                 }
                 else {
-                    System.out.println("Erro 2 em " + simboloAtual.getToken() + " comparado com " + topoPilha);
-                    System.out.println("Linha: " + simboloAtual.getLinha() + " Coluna: " + simboloAtual.getColuna());
+                    //System.out.println("Erro 2 em " + simboloAtual.getToken() + " comparado com " + topoPilha);
+                    System.out.println("Erro na linha " + simboloAtual.getLinha() + ", coluna " + simboloAtual.getColuna() + ": \"" + primeiraProducaoDeNaoTerminal(topoPilha).toLowerCase() + "\" era esperado");
+                    //System.out.println("Linha: " + simboloAtual.getLinha() + " Coluna: " + simboloAtual.getColuna());
                     return;
                 }
             }

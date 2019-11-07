@@ -7,7 +7,7 @@ PROGRAMAINICIO
         Vire Para ESQUERDA
         Vire para DIREITA
         Mova 1 Passos         
-        aguarde ate robo pronto
+        aguarde para robo 
 
 
 
