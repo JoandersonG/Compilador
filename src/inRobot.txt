@@ -2,7 +2,7 @@ PROGRAMAINICIO
 	#uashuiadhahsdiahsdiaushdua
     DEFINAINSTRUCAO Trilha COMO
     INICIO
-        Mova N passos
+        Mova 3 passos
         aguarde ate robo pronto
         Vire Para ESQUERDA
         Vire para DIREITA
@@ -14,7 +14,7 @@ PROGRAMAINICIO
 
     FIM
     
-        Repita 3 VEZES Trilha fimrepita
+        Repita 3 VEZES Trilha 
         Vire Para DIREITA
     FIMEXECUCAO
 FIMPROGRAMA
