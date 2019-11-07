@@ -69,6 +69,9 @@ public class MainCompilador {
 
     private static String primeiraProducaoDeNaoTerminal(String naoTerminal) {
         if (naoTerminal == null) return null;
+        if (naoTerminal.matches(".*<IDENTIFICADOR,.*")) {
+            naoTerminal = "IDENTIFICADOR";
+        }
         int coluna = -1;
         for (int j = 1; j < 25; j++) {
             if (tabelaSintatica[0][j].equals(naoTerminal)) {
@@ -81,6 +84,9 @@ public class MainCompilador {
         }
         for (int i = 1; i < 46; i++) {
             if (tabelaSintatica[i][coluna] != null) {
+                if (tabelaSintatica[i][coluna].matches(" ")) {
+                    continue;
+                }
                 String[] split = tabelaSintatica[i][coluna].split(" ");
                 if (isTerminal(split[0])) {
                     return split[0];
