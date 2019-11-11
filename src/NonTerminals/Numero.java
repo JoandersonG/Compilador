@@ -1,10 +1,15 @@
 package NonTerminals;
 
 public class Numero  extends No{
-    private DigitoNum digitoNum;
+
+    private String num;
+
+    public Numero(String num) {
+        this.num = num;
+    }
 
     @Override
-    public boolean addNo(int posicaoNoArrayTree, String classe) {
+    public boolean addNoEmProximaPosicaoVazia(int posicaoNoArrayTree, String classe) {
         return false;
     }
 

@@ -5,17 +5,18 @@ public class ComandoBloco  extends No{
     private int comandoBloco = -1;
     private boolean lambda;
 
+    public ComandoBloco(boolean lambda) {
+        this.lambda = lambda;
+    }
+
     @Override
-    public boolean addNo(int posicaoNoArrayTree, String classe) {
+    public boolean addNoEmProximaPosicaoVazia(int posicaoNoArrayTree, String classe) {
+        if (lambda) return false;
         if (classe.equals("COMANDO")) {
             comando = posicaoNoArrayTree;
         }
         else if (classe.equals("COMANDOBLOCO")) {
             comandoBloco = posicaoNoArrayTree;
-        }
-        else {
-            lambda = true;//é isso mesmo? nops... :/
-            return false;
         }
         return true;
     }

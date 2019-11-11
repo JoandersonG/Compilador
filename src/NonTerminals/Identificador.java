@@ -1,11 +1,19 @@
 package NonTerminals;
 
 public class Identificador  extends No{
+    /*
     private Letra letra;
     private LetraDigito letraDigito;
+    */
+    private String id;
+
+    public Identificador(String id) {
+        this.id = id;
+        this.setNome(id);
+    }
 
     @Override
-    public boolean addNo(int posicaoNoArrayTree, String classe) {
+    public boolean addNoEmProximaPosicaoVazia(int posicaoNoArrayTree, String classe) {
         return false;
     }
 

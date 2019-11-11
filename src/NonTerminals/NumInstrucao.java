@@ -1,18 +1,33 @@
 package NonTerminals;
 
 public class NumInstrucao  extends No{
-    private Numero numero;
-    private NumInstrucao numInstrucao;
+    private int numero = -1;
+    private int numInstrucao = -1;
     //ou
     private boolean lambda;
 
+    public NumInstrucao(boolean lambda) {
+        this.lambda = lambda;
+    }
+
     @Override
-    public boolean addNo(int posicaoNoArrayTree, String classe) {
+    public boolean addNoEmProximaPosicaoVazia(int posicaoNoArrayTree, String classe) {
+        if (lambda) return false;
+        if (numero == -1) {
+            numero = posicaoNoArrayTree;
+            return true;
+        }
+        if (numInstrucao == -1) {
+            numInstrucao = posicaoNoArrayTree;
+            return true;
+        }
         return false;
+
     }
 
     @Override
     public boolean temCampoVazio() {
-        return false;
+        if (lambda) return false;
+        return (numero == -1 || numInstrucao == -1);
     }
 }

@@ -1,3 +1,5 @@
+import NonTerminals.Tree;
+
 import java.io.*;
 import java.util.*;
 
@@ -69,7 +71,9 @@ public class MainCompilador {
 
     private static String primeiraProducaoDeNaoTerminal(String naoTerminal) {
         if (naoTerminal == null) return null;
+        //System.out.println(naoTerminal);
         if (naoTerminal.matches(".*<IDENTIFICADOR,.*")) {
+          //  System.out.println("Entrou!!!");
             naoTerminal = "IDENTIFICADOR";
         }
         int coluna = -1;
@@ -101,6 +105,8 @@ public class MainCompilador {
 
 
     private static void analiseSintatica(List<Token> cadeiaTokens) {
+        //Instancia a árvore:
+        Tree arvore = new Tree();
         //coloco $ no fim da cadeia:
         cadeiaTokens.add(new Token("$","$",cadeiaTokens.size(),0));
         //crio a pilha:
@@ -122,12 +128,26 @@ public class MainCompilador {
                 if (topoPilha.equals(simboloAtual.getToken())) {//lexema ou token?
                     pilha.pop();
                     ponteiroCadeia++;
+
+                    //////////////ÁRVORE///////////////
+                    if (simboloAtual.getToken().equals("ID")){
+                        ArrayList<String> erros = arvore.addIdentificador(simboloAtual.getLexema());
+                        for (String erro: erros) {
+                            System.out.println(erro);
+                        }
+                    }
+                    else if (simboloAtual.getToken().equals("NUM")){
+                        ArrayList<String> erros = arvore.addNumero(simboloAtual.getLexema());
+                        for (String erro: erros) {
+                            System.out.println(erro);
+                        }
+                    }
+
+
+                    ///////////////}}}}////////////////
                 }
                 else{
-                    //System.out.println("Erro 1 em " + simboloAtual.getToken() + " comparado com " + topoPilha);
-                    //System.out.println("Erro: esperado " + simboloAtual.getToken() + ", mas obtido " + topoPilha);
                     System.out.println("Erro na linha " + simboloAtual.getLinha() + ", coluna " + simboloAtual.getColuna() + ": \"" + topoPilha.toLowerCase() + "\" era esperado");
-                    //System.out.println("Linha: " + simboloAtual.getLinha() + "Coluna: " + simboloAtual.getColuna());
                     return;
                 }
             }
@@ -135,6 +155,21 @@ public class MainCompilador {
                 //se existe na tabela sintática uma regra de topoPilha::=simboloAtual alguma outra coisa
                 String ladoDireito = getLadoDireitoRegra(topoPilha,simboloAtual.getToken());
                 if (ladoDireito != null) {
+
+                //////////////ÁRVORE///////////////
+                    if (!topoPilha.equals("IDENTIFICADOR") && !topoPilha.equals("NUMERO")){
+                        ArrayList<String> erros = arvore.addNonTerminal(topoPilha,ladoDireito);
+                        for (String erro: erros) {
+                            System.out.println(erro);
+                        }
+                    }
+
+                    //System.out.println(topoPilha);
+
+                ///////////////}}}}////////////////
+
+
+
                     pilha.pop();
                     /////empilhar em sentido inverso o ladoDireito da regra:
                     String[] ladoDireitoStrings = ladoDireito.split(" ");
@@ -143,9 +178,7 @@ public class MainCompilador {
                     }
                 }
                 else {
-                    //System.out.println("Erro 2 em " + simboloAtual.getToken() + " comparado com " + topoPilha);
                     System.out.println("Erro na linha " + simboloAtual.getLinha() + ", coluna " + simboloAtual.getColuna() + ": \"" + primeiraProducaoDeNaoTerminal(topoPilha).toLowerCase() + "\" era esperado");
-                    //System.out.println("Linha: " + simboloAtual.getLinha() + " Coluna: " + simboloAtual.getColuna());
                     return;
                 }
             }

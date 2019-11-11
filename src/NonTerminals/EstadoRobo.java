@@ -1,8 +1,14 @@
 package NonTerminals;
 
 public class EstadoRobo  extends No{
+    private String valor;
+
+    public EstadoRobo(String valor) {
+        this.valor = valor;
+    }
+
     @Override
-    public boolean addNo(int posicaoNoArrayTree, String classe) {
+    public boolean addNoEmProximaPosicaoVazia(int posicaoNoArrayTree, String classe) {
         return false;
     }
 

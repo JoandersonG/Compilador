@@ -1,7 +1,7 @@
 package NonTerminals;
 
-public class LetraDigito  extends No{
-    private Letra letra;
+public class LetraDigito /* extends No*/{
+    /*private Letra letra;
     private Digito digito;
     private LetraDigito letraDigito;
 
@@ -15,5 +15,5 @@ public class LetraDigito  extends No{
         return false;
     }
 
-    private boolean lambda;
+    private boolean lambda;*/
 }

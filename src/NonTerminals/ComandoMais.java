@@ -5,18 +5,18 @@ public class ComandoMais  extends No{
     private int comandoMais = -1;
     private boolean lambda;
 
+    public ComandoMais(boolean lambda) {
+        this.lambda = lambda;
+    }
+
     @Override
-    public boolean addNo(int posicaoNoArrayTree, String classe) {
-        if (comando == -1 && classe.equals("COMANDO")) {
+    public boolean addNoEmProximaPosicaoVazia(int posicaoNoArrayTree, String classe) {
+        if (lambda) return false;
+        if (classe.equals("COMANDO")) {
             comando = posicaoNoArrayTree;
         }
-        else if (comandoMais == -1 && classe.equals("COMANDOMAIS")) {
+        else if (classe.equals("COMANDOBLOCO")) {
             comandoMais = posicaoNoArrayTree;
-        }
-        else {
-            lambda = true;//isso está errado.
-            return false;
-            //todo: como descobrir se é lambda ou outra produção?
         }
         return true;
     }

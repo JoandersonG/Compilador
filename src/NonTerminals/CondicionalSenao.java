@@ -1,17 +1,26 @@
 package NonTerminals;
 
 public class CondicionalSenao  extends No{
-    private Comando comando;
+    private int comando = -1;
     //lambda??
     private boolean lambda;
 
+    public CondicionalSenao(boolean lambda) {
+        this.lambda = lambda;
+    }
+
     @Override
-    public boolean addNo(int posicaoNoArrayTree, String classe) {
+    public boolean addNoEmProximaPosicaoVazia(int posicaoNoArrayTree, String classe) {
+        if (lambda) return false;
+        if (comando == -1) {
+            comando = posicaoNoArrayTree;
+        }
         return false;
     }
 
     @Override
     public boolean temCampoVazio() {
-        return false;
+        if (lambda) return false;
+        return comando == -1;
     }
 }
