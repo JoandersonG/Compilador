@@ -1,5 +1,3 @@
-package NonTerminals;
-
 public class SimboloPilha {
     private String prox;
     private String atual;

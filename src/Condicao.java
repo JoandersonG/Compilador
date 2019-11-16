@@ -1,6 +1,4 @@
-package NonTerminals;
-
-public class Condicao  extends No{
+public class Condicao  extends No {
 
     private int estadoRobo = -1;
     //prod 2,3,4 não têm não-term

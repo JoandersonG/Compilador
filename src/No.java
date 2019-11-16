@@ -1,5 +1,3 @@
-package NonTerminals;
-
 public abstract class No {
 
     private String proximoObrigatorio = null;
@@ -7,6 +5,20 @@ public abstract class No {
     private String nome = null;
     private String val = null;
     private String atualProibido = null;
+    private String atualObrigatorio = null;
+
+    public String getAtualObrigatorio() {
+        return atualObrigatorio;
+    }
+
+    public void setAtualObrigatorio(String atualObrigatorio) {
+        if (val != null && !temCampoVazio() && atualObrigatorio != null && atualObrigatorio.matches("AGUARDE.*") && !val.equals("PRONTO")) {
+            //erro
+            //System.out.println("erro sem");
+            Tree.errosSemanticos.add("Erro semântico: instrução 'aguarde ate robo pronto' era esperada");
+        }
+        this.atualObrigatorio = atualObrigatorio;
+    }
 
     public String getAtualProibido() {
         return atualProibido;
@@ -22,6 +34,10 @@ public abstract class No {
     }
 
     public void setVal(String val) {
+//        if (getAtualObrigatorio() != null && getAtualObrigatorio().matches("AGUARDE.*") && !temCampoVazio() && !val.matches("PRONTO")) {
+//            //erro
+//            System.out.println("Erro agr vai");
+//        }
         this.val = val;
     }
 

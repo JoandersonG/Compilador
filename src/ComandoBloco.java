@@ -1,6 +1,4 @@
-package NonTerminals;
-
-public class ComandoBloco  extends No{
+public class ComandoBloco  extends No {
     private int comando = -1;
     private int comandoBloco = -1;
     private boolean lambda;

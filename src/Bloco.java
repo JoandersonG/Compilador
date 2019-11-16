@@ -1,6 +1,4 @@
-package NonTerminals;
-
-public class Bloco extends No{
+public class Bloco extends No {
     private int comandoBloco = -1;
 
     @Override

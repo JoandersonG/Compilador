@@ -1,17 +1,23 @@
 PROGRAMAINICIO 
 	#uashuiadhahsdiahsdiaushdua
-    DEFINAINSTRUCAO Trilha COMO
+#DEFINAINSTRUCAO tRILHA COMO PARE
+    DEFINAINSTRUCAO 2Trilha COMO
     INICIO
         #Mova 3 passos
-        #aguarde ate robo pronto
-        Vire Para ESQUERDA
 
+    #   aguarde ate robo pronto
+       
+        #Mova 3 passos
+        
+       Vire Para ESQUERDA
+pare
         Vire para DIREITA
     fim
-definainstrucao trilha como
-pare
+
     execucaoinicio
-        Repita 3 VEZES Trilha fimrepita
+    
+        Repita 3 VEZES 2Trilha fimrepita
         #Vire Para DIREITA
+#mova 4 passos
     FIMEXECUCAO
 FIMPROGRAMA

@@ -1,25 +1,24 @@
-package NonTerminals;
-
-public class Laco  extends No{
-    private int condicao = -1;
+public class CondicionalSenao  extends No {
     private int comando = -1;
+    //lambda??
+    private boolean lambda;
+
+    public CondicionalSenao(boolean lambda) {
+        this.lambda = lambda;
+    }
 
     @Override
     public boolean addNoEmProximaPosicaoVazia(int posicaoNoArrayTree, String classe) {
-
-        if (condicao == -1) {
-            condicao = posicaoNoArrayTree;
-            return true;
-        }
+        if (lambda) return false;
         if (comando == -1) {
             comando = posicaoNoArrayTree;
-            return true;
         }
         return false;
     }
 
     @Override
     public boolean temCampoVazio() {
-        return (comando == -1 || condicao == -1);
+        if (lambda) return false;
+        return comando == -1;
     }
 }

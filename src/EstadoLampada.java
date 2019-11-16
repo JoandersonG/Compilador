@@ -1,6 +1,4 @@
-package NonTerminals;
-
-public class EstadoLampada  extends No{
+public class EstadoLampada  extends No {
     //acesa
     //apagada
     String valor;

@@ -1,6 +1,4 @@
-package NonTerminals;
-
-public class LocalLampada  extends No{
+public class LocalLampada  extends No {
 
     private int sentido = -1;
     private String value;

@@ -1,6 +1,4 @@
-package NonTerminals;
-
-public class Declaracao  extends No{
+public class Declaracao  extends No {
     private int identificador = -1;
     private int comando = -1;
     private int declaracao = -1;

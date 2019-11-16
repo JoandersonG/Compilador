@@ -1,5 +1,3 @@
-import NonTerminals.Tree;
-
 import java.io.*;
 import java.util.*;
 
@@ -7,6 +5,23 @@ public class MainCompilador {
 
     private static String[][] tabelaSintatica;
     private static Map<String, String> errosTabela;
+
+    // Inicializando tabela de símbolos
+    private static Map<String, TabelaSimbolosEntry> tabelaSimbolos = new HashMap<String, TabelaSimbolosEntry>();
+
+    public static boolean findIdentificadorNaTabelaDeSimbolos(String id) {
+        String aux = "<identificador, " + id + ">";
+        if (tabelaSimbolos.containsKey(aux)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public static void addTabelaSimbolos(String key, TabelaSimbolosEntry tse) {
+        tabelaSimbolos.put(key,tse);
+    }
 
     public static void main(String[] args) {
 
@@ -18,6 +33,7 @@ public class MainCompilador {
             MainCompilador.popularTabelaSintatica();
             tabelaSintaticaToUpperCase();
             analiseSintatica(tokenTable);
+            printData();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -147,7 +163,7 @@ public class MainCompilador {
                     ///////////////}}}}////////////////
                 }
                 else{
-                    System.out.println("Erro na linha " + simboloAtual.getLinha() + ", coluna " + simboloAtual.getColuna() + ": \"" + topoPilha.toLowerCase() + "\" era esperado");
+                    System.out.println("Erro sintático na linha " + simboloAtual.getLinha() + ", coluna " + simboloAtual.getColuna() + ": \"" + topoPilha.toLowerCase() + "\" era esperado");
                     return;
                 }
             }
@@ -161,6 +177,7 @@ public class MainCompilador {
                         ArrayList<String> erros = arvore.addNonTerminal(topoPilha,ladoDireito);
                         for (String erro: erros) {
                             System.out.println(erro);
+                            //System.out.println(" na Linha " + simboloAtual.getLinha());
                         }
                     }
 
@@ -178,7 +195,7 @@ public class MainCompilador {
                     }
                 }
                 else {
-                    System.out.println("Erro na linha " + simboloAtual.getLinha() + ", coluna " + simboloAtual.getColuna() + ": \"" + primeiraProducaoDeNaoTerminal(topoPilha).toLowerCase() + "\" era esperado");
+                    System.out.println("Erro sintático na linha " + simboloAtual.getLinha() + ", coluna " + simboloAtual.getColuna() + ": \"" + primeiraProducaoDeNaoTerminal(topoPilha).toLowerCase() + "\" era esperado");
                     return;
                 }
             }
@@ -535,8 +552,6 @@ public class MainCompilador {
         // Inicializando lista de tokens resultantes
         List<Token> tokenList = new ArrayList<Token>();
 
-        // Inicializando tabela de símbolos
-        Map<String, TabelaSimbolosEntry> tabelaSimbolos = new HashMap<String, TabelaSimbolosEntry>();
 
         int estadoAtual, estadoAnterior;
         int linha = 0;
@@ -613,10 +628,10 @@ public class MainCompilador {
                             tokenList.add(token);
 
                             // Verifica se já existe na tabela de símbolos e insere caso contrário
-                            if (!tabelaSimbolos.containsKey(tokenString)) {
-                                TabelaSimbolosEntry newEntry = new TabelaSimbolosEntry(tokenString, lexema.toString());
-                                tabelaSimbolos.put(tokenString, newEntry);
-                            }
+//                            if (!tabelaSimbolos.containsKey(tokenString)) {
+//                                TabelaSimbolosEntry newEntry = new TabelaSimbolosEntry(lexema.toString(), tokenString);
+//                                tabelaSimbolos.put(tokenString, newEntry);
+//                            }
                         }
                     }
 
@@ -683,10 +698,10 @@ public class MainCompilador {
                             tokenList.add(token);
 
                             // Verifica se já existe na tabela de símbolos e insere caso contrário
-                            if (!tabelaSimbolos.containsKey(tokenString)) {
-                                TabelaSimbolosEntry newEntry = new TabelaSimbolosEntry(tokenString, lexema.toString());
-                                tabelaSimbolos.put(tokenString, newEntry);
-                            }
+//                            if (!tabelaSimbolos.containsKey(tokenString)) {
+//                                TabelaSimbolosEntry newEntry = new TabelaSimbolosEntry(lexema.toString(), tokenString);
+//                                tabelaSimbolos.put(tokenString, newEntry);
+//                            }
                         }
                     }
 
@@ -753,10 +768,10 @@ public class MainCompilador {
                             tokenList.add(token);
 
                             // Verifica se já existe na tabela de símbolos e insere caso contrário
-                            if (!tabelaSimbolos.containsKey(tokenString)) {
-                                TabelaSimbolosEntry newEntry = new TabelaSimbolosEntry(tokenString, lexema.toString());
-                                tabelaSimbolos.put(tokenString, newEntry);
-                            }
+//                            if (!tabelaSimbolos.containsKey(tokenString)) {
+//                                TabelaSimbolosEntry newEntry = new TabelaSimbolosEntry(lexema.toString(), tokenString);
+//                                tabelaSimbolos.put(tokenString, newEntry);
+//                            }
                         }
                     }
 
@@ -835,15 +850,25 @@ public class MainCompilador {
             }
         }
 
+//        if (!tabelaSimbolos.isEmpty()) {
+//            System.out.println();
+//            System.out.println("SIMBOLOS");
+//            for (String token : tabelaSimbolos.keySet()) {
+//                System.out.println("Lexema: " + tabelaSimbolos.get(token).getLexema() + " Token: " + tabelaSimbolos.get(token).getToken());
+//            }
+//        }
+
+        return tokenList;
+    }
+
+    private static void printData() {
+        System.out.println();
+        System.out.println("TABELA DE SÍMBOLOS:");
         if (!tabelaSimbolos.isEmpty()) {
-            System.out.println();
-            System.out.println("SIMBOLOS");
             for (String token : tabelaSimbolos.keySet()) {
                 System.out.println("Lexema: " + tabelaSimbolos.get(token).getLexema() + " Token: " + tabelaSimbolos.get(token).getToken());
             }
         }
-
-        return tokenList;
     }
 
     private static String getLexemaOriginal(String path, int linha, int coluna) throws FileNotFoundException {

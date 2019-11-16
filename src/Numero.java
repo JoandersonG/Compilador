@@ -1,10 +1,9 @@
-package NonTerminals;
+public class Numero  extends No {
 
-public class EstadoRobo  extends No{
-    private String valor;
+    private String num;
 
-    public EstadoRobo(String valor) {
-        this.valor = valor;
+    public Numero(String num) {
+        this.num = num;
     }
 
     @Override
@@ -16,5 +15,4 @@ public class EstadoRobo  extends No{
     public boolean temCampoVazio() {
         return false;
     }
-    //pronto, ocupado, parado
 }

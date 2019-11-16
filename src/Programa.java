@@ -1,6 +1,4 @@
-package NonTerminals;
-
-public class Programa extends No{
+public class Programa extends No {
     private int declaracao = -1;
     private int comando = -1;
     private int comandoMais = -1;

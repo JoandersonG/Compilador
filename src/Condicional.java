@@ -1,6 +1,4 @@
-package NonTerminals;
-
-public class Condicional  extends No{
+public class Condicional  extends No {
     private int condicao = -1;
     private int comando = -1;
     private int condicionalSenao = -1;

@@ -1,6 +1,4 @@
-package NonTerminals;
-
-public class NumInstrucao  extends No{
+public class NumInstrucao  extends No {
     private int numero = -1;
     private int numInstrucao = -1;
     //ou

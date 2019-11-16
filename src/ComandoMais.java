@@ -1,6 +1,4 @@
-package NonTerminals;
-
-public class ComandoMais  extends No{
+public class ComandoMais  extends No {
     private int comando = -1;
     private int comandoMais = -1;
     private boolean lambda;

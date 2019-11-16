@@ -1,6 +1,4 @@
-package NonTerminals;
-
-public class Comando  extends No{
+public class Comando  extends No {
 
     //somente um desses atributos acontece em cada instância
 

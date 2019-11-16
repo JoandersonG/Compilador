@@ -1,11 +1,10 @@
-package NonTerminals;
-
-public class Sentido  extends No{
+public class Sentido  extends No {
 
     private String value = null;
 
     public Sentido(String value) {
         this.value = value;
+        this.setVal(value);
     }
 
     public String getValue() {
