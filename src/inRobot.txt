@@ -1,23 +1,25 @@
 PROGRAMAINICIO 
 	#uashuiadhahsdiahsdiaushdua
-#DEFINAINSTRUCAO tRILHA COMO PARE
-    DEFINAINSTRUCAO 2Trilha COMO
-    INICIO
-        #Mova 3 passos
 
-    #   aguarde ate robo pronto
-       
-        #Mova 3 passos
-        
-       Vire Para ESQUERDA
-pare
-        Vire para DIREITA
+    DEFINAINSTRUCAO Trilha COMO
+    inicio    
+    mova 1 passos
+    aguarde ate robo pronto
     fim
-
+definainstrucao vertical como
+inicio    
+mova 1 passos
+    aguarde ate robo pronto
+fim
+definainstrucao princ como
+inicio   
+        vire para esquerda
+        repita 20 vezes trilha fimrepita
+        vire para esquerda
+        repita 15 vezes vertical fimrepita
+        apague lampada
+fim
     execucaoinicio
-    
-        Repita 3 VEZES 2Trilha fimrepita
-        #Vire Para DIREITA
-#mova 4 passos
+        princ
     FIMEXECUCAO
 FIMPROGRAMA

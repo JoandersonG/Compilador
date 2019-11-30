@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Numero  extends No {
 
     private String num;
@@ -9,6 +11,12 @@ public class Numero  extends No {
     @Override
     public boolean addNoEmProximaPosicaoVazia(int posicaoNoArrayTree, String classe) {
         return false;
+    }
+
+    @Override
+    public void updateAsm() {
+        setAsm(new ArrayList<>());
+        addAsm("mov bl, " + num);
     }
 
     @Override

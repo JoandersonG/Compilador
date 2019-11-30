@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Comando  extends No {
 
     //somente um desses atributos acontece em cada instância
@@ -7,6 +9,35 @@ public class Comando  extends No {
     private int laco = -1;
     private int condicional = -1;
     private int instrucao = -1;
+
+    @Override
+    public void updateAsm() {
+        if (bloco == -1 && iteracao == -1 && laco == -1 && condicional == -1 && instrucao == -1) {
+            return;
+        }
+        int nonTerm = bloco;
+        if (nonTerm == -1) {
+            nonTerm = iteracao;
+            if (nonTerm == -1) {
+                nonTerm = laco;
+                if (nonTerm == -1) {
+                    nonTerm = condicional;
+                    if (nonTerm == -1)
+                        nonTerm = instrucao;
+                }
+            }
+        }
+        setAsm(new ArrayList<>());
+        addAsm("pusha");
+        if (nonTerm != -1) {
+            Tree.tree.get(nonTerm).updateAsm();
+            addAsm(Tree.tree.get(nonTerm).getAsm());
+
+        }
+        addAsm("popa");
+    }
+
+
     private String regra;
 
     public Comando(String regra) {

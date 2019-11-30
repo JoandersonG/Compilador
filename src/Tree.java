@@ -1,16 +1,26 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.nio.charset.Charset;
+import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.Stack;
 
 
 public class Tree {
 
-    private ArrayList<No> tree;
+    public static ArrayList<No> tree = new ArrayList<>();
     private Stack<Integer> semanticStack;
     private ArrayList<Integer> stackSemantico;
     public static ArrayList<String> errosSemanticos = new ArrayList<>();
+    private static int idUnico = 0;
+
+    public static int getIdUnico() {
+        return ++idUnico;
+    }
 
     public Tree() {
-        tree = new ArrayList<>();
+        //tree = new ArrayList<>();
         semanticStack = new Stack<>();
         //errosSemanticos = new ArrayList<>();
     }
@@ -121,6 +131,28 @@ public class Tree {
         }
 
     }*/
+
+
+
+    private ArrayList<String> updateAsm() {
+        tree.get(0).updateAsm();
+        return tree.get(0).getAsm();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     private ArrayList<String> gerenciarStackSemantico() {
         ArrayList<String>resultado = new ArrayList<>();
         /*if (semanticStack.isEmpty()) {
@@ -243,6 +275,75 @@ public class Tree {
         while(!semanticStack.isEmpty() && !tree.get(semanticStack.peek()).temCampoVazio()) {
             //propaga:
             No noQueAcabeiDeRemover = tree.get(semanticStack.pop());
+
+            //==========================================================================================================//
+            //                                           Geração de Código                                              //
+            //==========================================================================================================//
+            ArrayList<String> asm = new ArrayList<>();
+
+           /* if (noQueAcabeiDeRemover.getClass() == Bloco.class) {
+                asm = tree.get(((Bloco)noQueAcabeiDeRemover).getComandoBloco()).getAsm();
+                noQueAcabeiDeRemover.setAsm(asm);
+            }
+
+            if (noQueAcabeiDeRemover.getClass() == Comando.class) {
+
+            }*/
+
+            if (noQueAcabeiDeRemover.getClass() == Programa.class) {
+
+                try {
+                    Path path = Paths.get("/home/joanderson/Coding/Compilador/src/outRobot.txt");
+                    //String textoExemplo = "teste teste!!";
+                    //byte[] linha;
+                    //byte[] textoEmBytes = textoExemplo.getBytes();
+                    //Files.write(path,noQueAcabeiDeRemover.getAsm().get(0).getBytes());
+                    //String patha = "/home/joanderson/Coding/Compilador/src/outRobot.txt";
+                    //FileWriter arq = new FileWriter(patha);
+                    //PrintWriter gravarArq = new PrintWriter(arq);
+
+                    noQueAcabeiDeRemover.updateAsm();
+
+
+//                    String s = noQueAcabeiDeRemover.getAsm().get(0);
+//                    Charset charset = Charset.forName("US-ASCII");
+//
+//                    BufferedWriter bufferedWriter = Files.newBufferedWriter(path,charset);
+//                    bufferedWriter.write(s, 0, s.length());
+
+
+                    Files.write(path,("").getBytes());
+                    for (String s : noQueAcabeiDeRemover.getAsm()) {
+                     //   System.out.println(s);
+                        String[] split = s.split("\n");
+                        for (String sp : split) {
+                            Files.write(path,(sp + "\n").getBytes(), StandardOpenOption.APPEND);
+
+                            //arq.write(sp);
+                            //Files.
+                     //       gravarArq.append(sp);
+                        }
+
+//                        linha = s.getBytes();
+//                        Files.write(path,linha);
+                        //Files.write(path,s.getBytes(), StandardOpenOption.APPEND);
+                      //  gravarArq.write("teste teste");
+                        //gravarArq.write(s);
+
+                    }
+                    //arq.close();
+                    //gravarArq.close();
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+
+            //==========================================================================================================//
+
+            //==========================================================================================================//
 
             //teste de atual obrigatório:
             if (noQueAcabeiDeRemover.getVal() == null && noQueAcabeiDeRemover.getAtualObrigatorio()!=null) {

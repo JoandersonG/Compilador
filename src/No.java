@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public abstract class No {
 
     private String proximoObrigatorio = null;
@@ -6,6 +8,31 @@ public abstract class No {
     private String val = null;
     private String atualProibido = null;
     private String atualObrigatorio = null;
+    private ArrayList<String> asm = new ArrayList<>();
+
+    public ArrayList<String> getAsm() {
+        return asm;
+    }
+
+    public void setAsm(ArrayList<String> asm) {
+        this.asm = asm;
+    }
+
+    public void addAsm(ArrayList<String> asm) {
+        this.asm.addAll(asm);
+    }
+
+    public void addAsm(String[] asm) {
+        for (String line : asm) {
+            this.asm.add(line);
+        }
+    }
+
+    public void addAsm(String line) {
+        asm.add(line);
+    }
+
+    public abstract void updateAsm();
 
     public String getAtualObrigatorio() {
         return atualObrigatorio;

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class EstadoLampada  extends No {
     //acesa
     //apagada
@@ -5,6 +7,19 @@ public class EstadoLampada  extends No {
 
     public EstadoLampada(String valor) {
         this.valor = valor;
+        this.setVal(valor);
+    }
+
+    @Override
+    public void updateAsm() {
+        setAsm(new ArrayList<>());
+        if (valor.equals("ACESA")) {
+            addAsm("mov cl, 0;acesa");
+        }
+        else {
+            addAsm("mov cl, 1;apagada");
+
+        }
     }
 
     @Override

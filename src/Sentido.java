@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Sentido  extends No {
 
     private String value = null;
@@ -5,6 +7,17 @@ public class Sentido  extends No {
     public Sentido(String value) {
         this.value = value;
         this.setVal(value);
+    }
+
+    @Override
+    public void updateAsm() {
+        setAsm(new ArrayList<>());
+        if (value.equals("ESQUERDA")) {
+            addAsm("MOV BL, 0;esquerda");
+        }
+        else {//direita
+            addAsm("MOV BL, 1;direita");
+        }
     }
 
     public String getValue() {

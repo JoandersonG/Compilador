@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Declaracao  extends No {
     private int identificador = -1;
     private int comando = -1;
@@ -6,6 +8,22 @@ public class Declaracao  extends No {
 
     public Declaracao(boolean lambda) {
         this.lambda = lambda;
+    }
+
+    @Override
+    public void updateAsm() {
+        setAsm(new ArrayList<>());
+        if (lambda) {
+            return;
+        }
+        Tree.tree.get(comando).updateAsm();
+        Tree.tree.get(declaracao).updateAsm();
+        String identif = Tree.tree.get(identificador).getNome();
+        addAsm(identif + " proc");
+        addAsm(Tree.tree.get(comando).getAsm());
+        addAsm("ret");
+        addAsm(identif + " endp");
+        addAsm(Tree.tree.get(declaracao).getAsm());
     }
 
     @Override

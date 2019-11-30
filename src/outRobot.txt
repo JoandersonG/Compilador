@@ -1,0 +1,205 @@
+
+;===================================
+;código copiado do arquivo exemplo:
+;===================================
+#start=robot.exe#
+
+name "robot"
+
+#make_bin#
+#cs = 500#
+#ds = 500#
+#ss = 500#    ; stack
+#sp = ffff#
+#ip = 0#
+        
+; robot base i/o port:
+r_port equ 9
+
+;===================================
+main:
+loop_aguarde_robo_pronto_inicio:
+        IN AL, 11
+        AND AL, 00000010b
+        CMP AL, 0
+        JE pronto_end
+        JE loop_aguarde_robo_pronto_inicio
+pronto_end:
+pusha
+call PRINC
+
+popa
+end_main:
+jmp fim_de_tudo
+;===================================
+wait_exam proc
+; check if has new data:
+busy2: in al, r_port+2
+       test al, 00000001b
+       jz busy2 ; no new data, so wait.
+ret    
+wait_exam endp
+;===================================
+wait_busy proc
+;check if robot is still doing something
+wait:
+    in al, 11
+    test al, 00000010b
+    jz wait_busy_end
+    jmp wait
+wait_busy_end: 
+ret
+wait_busy endp
+;===================================
+TRILHA proc
+pusha
+pusha
+mov bl, 1
+        PUSHA
+        mov CL, 0
+        loop_mova_numInstrucao3:
+            CMP CL, BL ;EM BL tem resultado de numinstrucao
+            JGE after_loop_mova_numInstrucao3
+
+            MOV AL, 1
+            OUT 9, AL
+            call wait_busy;??
+
+            INC CL
+            JMP loop_mova_numInstrucao3
+        after_loop_mova_numInstrucao3:
+        POPA
+popa
+pusha
+loop_aguarde_condicao4:
+MOV AL, 4
+OUT 9, AL;examina
+call wait_exam
+in al, 10;resultado do exame
+        IN al, 11
+        AND AL, 00000010b
+        CMP AL, 0
+        JE pronto_true6
+        MOV BL, 1; padrão para falso
+        jmp pronto_end6
+        pronto_true6:
+        MOV BL, 0; padrão para verdadeiro
+        pronto_end6:
+            cmp bl, 0
+            je after_loop_aguarde_condicao4
+            jmp loop_aguarde_condicao4
+        after_loop_aguarde_condicao4:
+popa
+popa
+ret
+TRILHA endp
+VERTICAL proc
+pusha
+pusha
+mov bl, 1
+        PUSHA
+        mov CL, 0
+        loop_mova_numInstrucao7:
+            CMP CL, BL ;EM BL tem resultado de numinstrucao
+            JGE after_loop_mova_numInstrucao7
+
+            MOV AL, 1
+            OUT 9, AL
+            call wait_busy;??
+
+            INC CL
+            JMP loop_mova_numInstrucao7
+        after_loop_mova_numInstrucao7:
+        POPA
+popa
+pusha
+loop_aguarde_condicao8:
+MOV AL, 4
+OUT 9, AL;examina
+call wait_exam
+in al, 10;resultado do exame
+        IN al, 11
+        AND AL, 00000010b
+        CMP AL, 0
+        JE pronto_true10
+        MOV BL, 1; padrão para falso
+        jmp pronto_end10
+        pronto_true10:
+        MOV BL, 0; padrão para verdadeiro
+        pronto_end10:
+            cmp bl, 0
+            je after_loop_aguarde_condicao8
+            jmp loop_aguarde_condicao8
+        after_loop_aguarde_condicao8:
+popa
+popa
+ret
+VERTICAL endp
+PRINC proc
+pusha
+pusha
+MOV BL, 0;esquerda
+        CMP BL, 0
+        JE vire_para_esquerda11
+        MOV AL, 3
+        JMP vire_para_sentido_fim11
+        vire_para_esquerda11:
+        MOV AL, 2
+        vire_para_sentido_fim11:
+        OUT 9, AL
+        call wait_busy
+popa
+pusha
+mov bl, 20
+    mov al, 0
+    loop_iteracao12:
+        cmp al, bl
+        jge after_loop_iteracao12
+        
+pusha
+call TRILHA
+
+popa
+INC al
+        jmp loop_iteracao12
+    after_loop_iteracao12:
+popa
+pusha
+MOV BL, 0;esquerda
+        CMP BL, 0
+        JE vire_para_esquerda14
+        MOV AL, 3
+        JMP vire_para_sentido_fim14
+        vire_para_esquerda14:
+        MOV AL, 2
+        vire_para_sentido_fim14:
+        OUT 9, AL
+        call wait_busy
+popa
+pusha
+mov bl, 15
+    mov al, 0
+    loop_iteracao15:
+        cmp al, bl
+        jge after_loop_iteracao15
+        
+pusha
+call VERTICAL
+
+popa
+INC al
+        jmp loop_iteracao15
+    after_loop_iteracao15:
+popa
+pusha
+mov al, 6
+out 9, al
+call wait_busy
+popa
+popa
+ret
+PRINC endp
+fim_de_tudo:
+mov ah, 0
+int 16h
+ret

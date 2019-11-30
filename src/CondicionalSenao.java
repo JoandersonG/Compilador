@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class CondicionalSenao  extends No {
     private int comando = -1;
     //lambda??
@@ -14,6 +16,16 @@ public class CondicionalSenao  extends No {
             comando = posicaoNoArrayTree;
         }
         return false;
+    }
+
+    @Override
+    public void updateAsm() {
+        setAsm(new ArrayList<>());
+        if (lambda) {
+            return;
+        }
+        Tree.tree.get(comando).updateAsm();
+        addAsm(Tree.tree.get(comando).getAsm());
     }
 
     @Override

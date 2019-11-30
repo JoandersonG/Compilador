@@ -19,4 +19,9 @@ public class InstrucaoPassos  extends No {
     public boolean temCampoVazio() {
         return false;
     }
+
+    @Override
+    public void updateAsm() {
+
+    }
 }

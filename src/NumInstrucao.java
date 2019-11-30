@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class NumInstrucao  extends No {
     private int numero = -1;
     private int numInstrucao = -1;
@@ -20,6 +22,19 @@ public class NumInstrucao  extends No {
             return true;
         }
         return false;
+
+    }
+
+    @Override
+    public void updateAsm() {
+        if (lambda) return;
+
+        Tree.tree.get(numero).updateAsm();
+        Tree.tree.get(numInstrucao).updateAsm();
+
+        setAsm(new ArrayList<>());
+        addAsm(Tree.tree.get(numero).getAsm());
+        addAsm(Tree.tree.get(numInstrucao).getAsm());
 
     }
 

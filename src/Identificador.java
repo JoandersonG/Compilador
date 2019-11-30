@@ -11,6 +11,11 @@ public class Identificador  extends No {
     }
 
     @Override
+    public void updateAsm() {
+
+    }
+
+    @Override
     public boolean addNoEmProximaPosicaoVazia(int posicaoNoArrayTree, String classe) {
         return false;
     }
