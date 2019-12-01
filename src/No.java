@@ -42,7 +42,8 @@ public abstract class No {
         if (val != null && !temCampoVazio() && atualObrigatorio != null && atualObrigatorio.matches("AGUARDE.*") && !val.equals("PRONTO")) {
             //erro
             //System.out.println("erro sem");
-            Tree.errosSemanticos.add("Erro semântico: instrução 'aguarde ate robo pronto' era esperada");
+            //Tree.errosSemanticos.add("Erro semântico: instrução 'aguarde ate robo pronto' era esperada");
+            Tree.errosSemanticos.add("<sem_instr_necessaria>,\"aguarde ate robo pronto\"");
         }
         this.atualObrigatorio = atualObrigatorio;
     }

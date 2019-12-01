@@ -233,7 +233,9 @@ public class MainCompilador {
 
                                 erroObj = errosTabela.get(er.split(",")[0]);
 
-                                erro = new Erro(er.split(",")[0], erroObj.toString()
+                                erro = new Erro(
+                                        er.split(",")[0],
+                                        erroObj.toString()
                                         .replace("{identificador}", er.split(",")[1])
                                         .replace("{linha}", String.valueOf(simboloAtual.getLinha()))
                                 );
