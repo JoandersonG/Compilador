@@ -172,7 +172,8 @@ public class Tree {
                 boolean teste = tree.get(semanticStack.peek()).setAtualProibido(tree.get(topoAnterior).getProximoProibido());
                 if (!teste) {
                     //System.out.println("1Erro semântico: instrução \"" + tree.get(topoAnterior).getAtualProibido() + "\" não permitida");
-                    resultado.add("Erro semântico: instrução \"" + tree.get(topoAnterior).getAtualProibido() + "\" não permitida");
+                    //resultado.add("Erro semântico: instrução \"" + tree.get(topoAnterior).getAtualProibido() + "\" não permitida");
+                    resultado.add("<sem_instr_proibida>," + tree.get(topoAnterior).getAtualProibido());
                 }
                 tree.get(topoAnterior).setProximoProibido(null);
             }
@@ -182,7 +183,8 @@ public class Tree {
                     boolean teste = tree.get(semanticStack.peek()).setAtualProibido(vetorDeProibidos[vetorDeProibidos.length-1]);//pego só a última palavra, que é o sentido
                     if (!teste) {
                         //System.out.println("2Erro semântico: instrução \"" + tree.get(topoAnterior).getAtualProibido() + "\" não permitida");
-                        resultado.add("Erro semântico: instrução \"" + tree.get(topoAnterior).getAtualProibido() + "\" não permitida");
+                        //resultado.add("Erro semântico: instrução \"" + tree.get(topoAnterior).getAtualProibido() + "\" não permitida");
+                        resultado.add("<sem_instr_proibida>," + tree.get(topoAnterior).getAtualProibido());
                     }
                 }
             }
@@ -190,7 +192,8 @@ public class Tree {
                 boolean teste = tree.get(semanticStack.peek()).setAtualProibido(tree.get(topoAnterior).getAtualProibido());
                 if (!teste) {
                     //System.out.println("3Erro semântico: instrução \"" + tree.get(topoAnterior).getAtualProibido() + "\" não permitida");
-                    resultado.add("Erro semântico: instrução \"" + tree.get(topoAnterior).getAtualProibido() + "\" não permitida");
+                    //resultado.add("Erro semântico: instrução \"" + tree.get(topoAnterior).getAtualProibido() + "\" não permitida");
+                    resultado.add("<sem_instr_proibida>," + tree.get(topoAnterior).getAtualProibido());
                 }
                 //propaguei o atual proibido
             }
@@ -349,7 +352,8 @@ public class Tree {
             if (noQueAcabeiDeRemover.getVal() == null && noQueAcabeiDeRemover.getAtualObrigatorio()!=null) {
                 //se o nó que eu removi (que, portanto, era folha) ainda tinha uma obrigação com seu campo atualObrigatório, então é erro semântico
                 //System.out.println("erro semantico 3.3");
-                resultado.add("Erro semântico: instrução " + noQueAcabeiDeRemover.getAtualObrigatorio() + " era necessária");
+                //resultado.add("Erro semântico: instrução " + noQueAcabeiDeRemover.getAtualObrigatorio() + " era necessária");
+                resultado.add("<sem_instr_necessaria>," + noQueAcabeiDeRemover.getAtualObrigatorio());
             }
             /////
 
@@ -392,7 +396,8 @@ public class Tree {
                     if (!MainCompilador.findIdentificadorNaTabelaDeSimbolos(noQueAcabeiDeRemover.getNome())) {
                         //erro:
                         //System.out.println("erro -> de id não encontrado");
-                        resultado.add("Erro semântico: procedimento '" + noQueAcabeiDeRemover.getNome() + "' não declarado.");
+                        //resultado.add("Erro semântico: procedimento '" + noQueAcabeiDeRemover.getNome() + "' não declarado.");
+                        resultado.add("<sem_id_nao_dec>," + noQueAcabeiDeRemover.getNome());
                     }
                 }
 
@@ -415,7 +420,8 @@ public class Tree {
                     String tokenString = "<identificador, " + noQueAcabeiDeRemover.getNome() + ">";
                     if (MainCompilador.findIdentificadorNaTabelaDeSimbolos(noQueAcabeiDeRemover.getNome())) {
                         //erro
-                        resultado.add("Erro semântico: múltiplas instruções com mesmo nome: " + noQueAcabeiDeRemover.getNome());
+                        //resultado.add("Erro semântico: múltiplas instruções com mesmo nome: " + noQueAcabeiDeRemover.getNome());
+                        resultado.add("<sem_instr_mesmo_nome>," + noQueAcabeiDeRemover.getNome());
                     }
                     else {
                         //adiciono na tabela de símbolos

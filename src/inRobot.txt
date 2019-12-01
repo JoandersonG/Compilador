@@ -1,17 +1,18 @@
+#programa que foi dado nas especificações
 PROGRAMAINICIO 
+definainstrucao trilha como pare
     DEFINAINSTRUCAO Trilha COMO
     inicio    
-    mova 3 passos
-#    aguarde ate robo pronto
+    mova 30 passos
+    aguarde ate robo pronto
     vire para esquerda
-vire para direita
-    apagar 
-    apagar lampada
+    apague lampada
     vire para direita
-    mova 1 passo
+    mova 1 passos
     aguarde ate robo pronto
     fim
     execucaoinicio
-    repita 3 vezes Trilha
+    repita 3 vezes Trailha fimrepita
+vire para direita
     FIMEXECUCAO
 FIMPROGRAMA

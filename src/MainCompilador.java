@@ -5,6 +5,12 @@ public class MainCompilador {
 
     private static String[][] tabelaSintatica;
     private static Map<String, String> errosTabela;
+    // Inicializando tabela de descrições dos erros
+    private static TabelaErros tabelaErros = new TabelaErros();
+
+
+    // Inicializando lista de erros
+    private static List<Erro> listError = new ArrayList<Erro>();
 
     // Inicializando tabela de símbolos
     private static Map<String, TabelaSimbolosEntry> tabelaSimbolos = new HashMap<String, TabelaSimbolosEntry>();
@@ -24,6 +30,7 @@ public class MainCompilador {
     }
 
     public static void main(String[] args) {
+        errosTabela = tabelaErros.getErrors();
 
         //é necessário um arquivo de entrada com o programa a ser compilado
         try {
@@ -148,14 +155,43 @@ public class MainCompilador {
                     //////////////ÁRVORE///////////////
                     if (simboloAtual.getToken().equals("ID")){
                         ArrayList<String> erros = arvore.addIdentificador(simboloAtual.getLexema());
-                        for (String erro: erros) {
-                            System.out.print(erro);
-                            System.out.println(" na Linha " + simboloAtual.getLinha());
+                        Object erroObj;
+                        Erro erro;
+                        for (String er: erros) {
+
+                            /*Object erroObj = errosTabela.get("<sint_err>");
+                    Erro erro = new Erro("<sint_err>", erroObj.toString()
+                            .replace("{linha}", String.valueOf(simboloAtual.getLinha()))
+                            .replace("{coluna}", String.valueOf(simboloAtual.getColuna()))
+                            .replace("{esperado}", topoPilha.toLowerCase())
+                    );*/
+                            erroObj = errosTabela.get(er.split(",")[0]);
+
+                            erro = new Erro(er.split(",")[0], erroObj.toString()
+                            .replace("{identificador}", er.split(",")[1])
+                            .replace("{linha}", String.valueOf(simboloAtual.getLinha()))
+                            );
+                            listError.add(erro);
+//                            System.out.print(er);
+
+//                            System.out.println(" na Linha " + simboloAtual.getLinha());
                         }
                     }
                     else if (simboloAtual.getToken().equals("NUM")){
                         ArrayList<String> erros = arvore.addNumero(simboloAtual.getLexema());
-                        for (String erro: erros) {
+                        Object erroObj;
+                        Erro erro;
+                        for (String er: erros) {
+
+                            erroObj = errosTabela.get(er.split(",")[0]);
+
+                            erro = new Erro(er.split(",")[0], erroObj.toString()
+                                    .replace("{identificador}", er.split(",")[1])
+                                    .replace("{linha}", String.valueOf(simboloAtual.getLinha()))
+                            );
+                            listError.add(erro);
+
+
                             System.out.print(erro);
                             System.out.println(" na Linha " + simboloAtual.getLinha());
                         }
@@ -165,9 +201,22 @@ public class MainCompilador {
                     ///////////////}}}}////////////////
                 }
                 else{
-                    System.out.println("Erro sintático na linha " + simboloAtual.getLinha() + ", coluna " + simboloAtual.getColuna() + ": \"" + topoPilha.toLowerCase() + "\" era esperado");
-                    if (!pilha.peek().equals("$")) pilha.pop();
-                    else return;
+                    /*Object erroObj = errosTabela.get("<lex_id_mal_formado>");
+                                Erro erro = new Erro("<lex_id_mal_formado>", erroObj.toString()
+                                        .replace("{lexema}", getLexemaOriginal(path,linha,coluna))
+                                        .replace("{linha}", String.valueOf(linha))
+                                        .replace("{coluna}", String.valueOf(coluna))
+                                );
+                                listError.add(erro);*/
+                    Object erroObj = errosTabela.get("<sint_err>");
+                    Erro erro = new Erro("<sint_err>", erroObj.toString()
+                            .replace("{linha}", String.valueOf(simboloAtual.getLinha()))
+                            .replace("{coluna}", String.valueOf(simboloAtual.getColuna()))
+                            .replace("{esperado}", topoPilha.toLowerCase())
+                    );
+                    listError.add(erro);
+                    //System.out.println("Erro sintático na linha " + simboloAtual.getLinha() + ", coluna " + simboloAtual.getColuna() + ": \"" + topoPilha.toLowerCase() + "\" era esperado");
+                    return;
                 }
             }
             else {//topoPilha é um não-terminal
@@ -178,7 +227,19 @@ public class MainCompilador {
                 //////////////ÁRVORE///////////////
                     if (!topoPilha.equals("IDENTIFICADOR") && !topoPilha.equals("NUMERO")){
                         ArrayList<String> erros = arvore.addNonTerminal(topoPilha,ladoDireito);
-                        for (String erro: erros) {
+                        Object erroObj;
+                        Erro erro;
+                        for (String er: erros) {
+
+                                erroObj = errosTabela.get(er.split(",")[0]);
+
+                                erro = new Erro(er.split(",")[0], erroObj.toString()
+                                        .replace("{identificador}", er.split(",")[1])
+                                        .replace("{linha}", String.valueOf(simboloAtual.getLinha()))
+                                );
+                                listError.add(erro);
+
+
                             System.out.print(erro);
                             System.out.println(" na Linha " + simboloAtual.getLinha());
                         }
@@ -198,9 +259,15 @@ public class MainCompilador {
                     }
                 }
                 else {
-                    System.out.println("Erro sintático na linha " + simboloAtual.getLinha() + ", coluna " + simboloAtual.getColuna() + ": \"" + primeiraProducaoDeNaoTerminal(topoPilha).toLowerCase() + "\" era esperado");
-                    if (!pilha.peek().equals("$")) pilha.pop();
-                    else return;
+                    Object erroObj = errosTabela.get("<sint_err>");
+                    Erro erro = new Erro("<sint_err>", erroObj.toString()
+                            .replace("{linha}", String.valueOf(simboloAtual.getLinha()))
+                            .replace("{coluna}", String.valueOf(simboloAtual.getColuna()))
+                            .replace("{esperado}", primeiraProducaoDeNaoTerminal(topoPilha).toLowerCase())
+                    );
+                    listError.add(erro);
+                    //System.out.println("Erro sintático na linha " + simboloAtual.getLinha() + ", coluna " + simboloAtual.getColuna() + ": \"" + primeiraProducaoDeNaoTerminal(topoPilha).toLowerCase() + "\" era esperado");
+                   return;
                 }
             }
         }
@@ -545,12 +612,7 @@ public class MainCompilador {
         TabelaReservada tabelaReservada = new TabelaReservada();
         Map<String, String> palavrasReservadas = tabelaReservada.getPalavrasReservadas();
 
-        // Inicializando tabela de descrições dos erros
-        TabelaErros tabelaErros = new TabelaErros();
-        errosTabela = tabelaErros.getErrors();
 
-        // Inicializando lista de erros
-        List<Erro> listError = new ArrayList<Erro>();
 
         // Inicializando lista de tokens resultantes
         List<Token> tokenList = new ArrayList<Token>();
@@ -579,8 +641,8 @@ public class MainCompilador {
                         switch (estadoAnterior) {
                             // Caso o último estado anterior tenha sido o 1 é um identificador mal formado
                             case 1: {
-                                Object erroObj = errosTabela.get("<id_mal_formado>");
-                                Erro erro = new Erro("<id_mal_formado>", erroObj.toString()
+                                Object erroObj = errosTabela.get("<lex_id_mal_formado>");
+                                Erro erro = new Erro("<lex_id_mal_formado>", erroObj.toString()
                                         .replace("{lexema}", getLexemaOriginal(path,linha,coluna))
                                         .replace("{linha}", String.valueOf(linha))
                                         .replace("{coluna}", String.valueOf(coluna))
@@ -590,8 +652,8 @@ public class MainCompilador {
                             }
                             // Caso o último estado anterior tenha sido o 2 é um número mal formado
                             case 2: {
-                                Object erroObj = errosTabela.get("<nmr_mal_formado>");
-                                Erro erro = new Erro("<nmr_mal_formado>", erroObj.toString()
+                                Object erroObj = errosTabela.get("<lex_nmr_mal_formado>");
+                                Erro erro = new Erro("<lex_nmr_mal_formado>", erroObj.toString()
                                         .replace("{lexema}", getLexemaOriginal(path,linha,coluna))
                                         .replace("{linha}", String.valueOf(linha))
                                         .replace("{coluna}", String.valueOf(coluna))
@@ -601,8 +663,8 @@ public class MainCompilador {
                             }
                             // É um símbolo mal formado caso contrário
                             default: {
-                                Object erroObj = errosTabela.get("<simb_not_id>");
-                                Erro erro = new Erro("<simb_not_id>", erroObj.toString()
+                                Object erroObj = errosTabela.get("<lex_simb_not_id>");
+                                Erro erro = new Erro("<lex_simb_not_id>", erroObj.toString()
                                         .replace("{lexema}", getLexemaOriginal(path,linha,coluna))
                                         .replace("{linha}", String.valueOf(linha))
                                         .replace("{coluna}", String.valueOf(coluna))
@@ -651,9 +713,9 @@ public class MainCompilador {
                         switch (estadoAnterior) {
                             // Caso o último estado anterior tenha sido o 1 é um identificador mal formado
                             case 1: {
-                                Object erroObj = errosTabela.get("<id_mal_formado>");
+                                Object erroObj = errosTabela.get("<lex_id_mal_formado>");
 
-                                Erro erro = new Erro("<id_mal_formado>", erroObj.toString()
+                                Erro erro = new Erro("<lex_id_mal_formado>", erroObj.toString()
                                         .replace("{lexema}", getLexemaOriginal(path,linha,coluna))
                                         .replace("{linha}", String.valueOf(linha))
                                         .replace("{coluna}", String.valueOf(coluna))
@@ -663,8 +725,8 @@ public class MainCompilador {
                             }
                             // Caso o último estado anterior tenha sido o 2 é um número mal formado
                             case 2: {
-                                Object erroObj = errosTabela.get("<nmr_mal_formado>");
-                                Erro erro = new Erro("<nmr_mal_formado>", erroObj.toString()
+                                Object erroObj = errosTabela.get("<lex_nmr_mal_formado>");
+                                Erro erro = new Erro("<lex_nmr_mal_formado>", erroObj.toString()
                                         .replace("{lexema}", getLexemaOriginal(path,linha,coluna))
                                         .replace("{linha}", String.valueOf(linha))
                                         .replace("{coluna}", String.valueOf(coluna))
@@ -674,8 +736,8 @@ public class MainCompilador {
                             }
                             // É um símbolo mal formado caso contrário
                             default: {
-                                Object erroObj = errosTabela.get("<simb_not_id>");
-                                Erro erro = new Erro("<simb_not_id>", erroObj.toString()
+                                Object erroObj = errosTabela.get("<lex_simb_not_id>");
+                                Erro erro = new Erro("<lex_simb_not_id>", erroObj.toString()
                                         .replace("{lexema}", getLexemaOriginal(path,linha,coluna))
                                         .replace("{linha}", String.valueOf(linha))
                                         .replace("{coluna}", String.valueOf(coluna))
@@ -719,8 +781,8 @@ public class MainCompilador {
                         switch (estadoAnterior) {
                             // Caso o último estado anterior tenha sido o 1 é um identificador mal formado
                             case 1: {
-                                Object erroObj = errosTabela.get("<id_mal_formado>");
-                                Erro erro = new Erro("<id_mal_formado>", erroObj.toString()
+                                Object erroObj = errosTabela.get("<lex_id_mal_formado>");
+                                Erro erro = new Erro("<lex_id_mal_formado>", erroObj.toString()
                                         .replace("{lexema}", getLexemaOriginal(path,linha,coluna))
                                         .replace("{linha}", String.valueOf(linha))
                                         .replace("{coluna}", String.valueOf(coluna))
@@ -730,8 +792,8 @@ public class MainCompilador {
                             }
                             // Caso o último estado anterior tenha sido o 2 é um número mal formado
                             case 2: {
-                                Object erroObj = errosTabela.get("<nmr_mal_formado>");
-                                Erro erro = new Erro("<nmr_mal_formado>", erroObj.toString()
+                                Object erroObj = errosTabela.get("<lex_nmr_mal_formado>");
+                                Erro erro = new Erro("<lex_nmr_mal_formado>", erroObj.toString()
                                         .replace("{lexema}", getLexemaOriginal(path,linha,coluna))
                                         .replace("{linha}", String.valueOf(linha))
                                         .replace("{coluna}", String.valueOf(coluna))
@@ -744,8 +806,8 @@ public class MainCompilador {
 
 
 
-                                Object erroObj = errosTabela.get("<simb_not_id>");
-                                Erro erro = new Erro("<simb_not_id>", erroObj.toString()
+                                Object erroObj = errosTabela.get("<lex_simb_not_id>");
+                                Erro erro = new Erro("<lex_simb_not_id>", erroObj.toString()
                                         .replace("{lexema}", getLexemaOriginal(path,linha,coluna))
                                         .replace("{linha}", String.valueOf(linha))
                                         .replace("{coluna}", String.valueOf(coluna))
@@ -835,12 +897,7 @@ public class MainCompilador {
 
         sc.close();
 
-        if (!listError.isEmpty()) {
-            System.out.println("ERROS");
-            for (Erro erro : listError) {
-                System.out.println("Code: " + erro.getCodigo() + " Erro: " + erro.getMensagem());
-            }
-        }
+
 
         if (!tokenList.isEmpty()) {
             System.out.println();
@@ -864,7 +921,25 @@ public class MainCompilador {
         return tokenList;
     }
 
+
+
     private static void printData() {
+        System.out.println();
+        if (!listError.isEmpty()) {
+            System.out.println("ERROS:");
+            for (Erro erro : listError) {
+                if (erro.getCodigo().matches("<lex.*")) {
+                    System.out.println("Erro léxico: " + erro.getMensagem());
+                }
+                if (erro.getCodigo().matches("<sint.*")) {
+                    System.out.println("Erro sintático: " + erro.getMensagem());
+                }
+                if (erro.getCodigo().matches("<sem.*")) {
+                    System.out.println("Erro semântico: " + erro.getMensagem());
+                }
+                //System.out.println("Code: " + erro.getCodigo() + " Erro: " + erro.getMensagem());
+            }
+        }
         System.out.println();
         System.out.println("TABELA DE SÍMBOLOS:");
         if (!tabelaSimbolos.isEmpty()) {
