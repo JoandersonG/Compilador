@@ -1,32 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f757df5c-dd38-4f91-bc64-29d089c9b3da" name="Default Changelist" comment="">
+    <list default="true" id="f757df5c-dd38-4f91-bc64-29d089c9b3da" name="Default Changelist" comment="geracao de codigo concluida">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Compilador/inRobot.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Compilador/inRobot.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Bloco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bloco.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Comando.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Comando.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ComandoBloco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ComandoBloco.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ComandoMais.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ComandoMais.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Condicao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Condicao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Condicional.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Condicional.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CondicionalSenao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CondicionalSenao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Declaracao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Declaracao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EstadoLampada.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EstadoLampada.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EstadoRobo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EstadoRobo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Identificador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Identificador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Instrucao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Instrucao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/InstrucaoPassos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InstrucaoPassos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Iteracao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Iteracao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Laco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Laco.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LocalLampada.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LocalLampada.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/No.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/No.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/NumInstrucao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NumInstrucao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Numero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Numero.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Programa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Programa.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Sentido.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Sentido.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Compilador/META-INF/Compilador.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainCompilador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainCompilador.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Tree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tree.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/inRobot.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/inRobot.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/outRobot.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/outRobot.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,8 +24,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Tree.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="109" selection-start-line="109" selection-end-line="109" />
+            <state relative-caret-position="1852">
+              <caret line="394" column="122" selection-start-line="394" selection-start-column="122" selection-end-line="394" selection-end-column="122" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -52,20 +33,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/lang/Object.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="25" column="29" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/MainCompilador.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="484">
-              <caret line="197" selection-start-line="197" selection-end-line="197" />
+            <state relative-caret-position="87">
+              <caret line="169" column="31" selection-start-line="169" selection-start-column="31" selection-end-line="169" selection-end-column="31" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#popularTabelaSintatica#0;class#MainCompilador#0" />
@@ -96,7 +68,7 @@
         <entry file="file://$PROJECT_DIR$/src/Comando.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="435">
-              <caret line="29" column="34" lean-forward="true" selection-start-line="29" selection-start-column="34" selection-end-line="29" selection-end-column="34" />
+              <caret line="29" column="34" selection-start-line="29" selection-start-column="34" selection-end-line="29" selection-end-column="34" />
               <folding>
                 <element signature="e#1107#1108#0" expanded="true" />
                 <element signature="e#1141#1142#0" expanded="true" />
@@ -181,6 +153,7 @@
       <find>in al, 11</find>
       <find>in al, 10</find>
       <find>loop_aguarde_condicao</find>
+      <find>identi</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -219,7 +192,6 @@
         <option value="$PROJECT_DIR$/src/NonTerminals/Instrucao.java" />
         <option value="$PROJECT_DIR$/src/NonTerminals/Tree.java" />
         <option value="$PROJECT_DIR$/src/NonTerminals/Elemento.java" />
-        <option value="$PROJECT_DIR$/src/MainCompilador.java" />
         <option value="$PROJECT_DIR$/src/Bloco.java" />
         <option value="$PROJECT_DIR$/src/Comando.java" />
         <option value="$PROJECT_DIR$/src/ComandoBloco.java" />
@@ -241,14 +213,15 @@
         <option value="$PROJECT_DIR$/src/Declaracao.java" />
         <option value="$PROJECT_DIR$/src/EstadoLampada.java" />
         <option value="$PROJECT_DIR$/src/Instrucao.java" />
-        <option value="$PROJECT_DIR$/src/Tree.java" />
         <option value="$PROJECT_DIR$/src/ComandoMais.java" />
+        <option value="$PROJECT_DIR$/src/Tree.java" />
+        <option value="$PROJECT_DIR$/src/MainCompilador.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="104" />
-    <option name="y" value="76" />
+    <option name="x" value="124" />
+    <option name="y" value="68" />
     <option name="width" value="906" />
     <option name="height" value="963" />
   </component>
@@ -390,7 +363,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573900171081</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="geracao de codigo concluida">
+      <created>1575153154253</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1575153154253</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TodoView">
@@ -403,7 +383,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="104" y="76" width="906" height="963" extended-state="1" />
+    <frame x="124" y="68" width="906" height="963" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22843823" />
@@ -413,8 +393,8 @@
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32837406" />
-      <window_info active="true" anchor="bottom" x="1939" y="328" width="683" height="741" id="Run" order="2" visible="true" weight="0.2591241" />
-      <window_info anchor="bottom" x="1053" y="154" width="683" height="768" id="Debug" order="3" type="FLOATING" visible="true" weight="0.8639745" />
+      <window_info active="true" anchor="bottom" x="1939" y="328" width="683" height="741" id="Run" order="2" visible="true" weight="0.6155718" />
+      <window_info anchor="bottom" x="1053" y="154" width="683" height="768" id="Debug" order="3" type="FLOATING" weight="0.8639745" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32886723" />
@@ -465,7 +445,8 @@
     <MESSAGE value="pequenos bugs corrigidos" />
     <MESSAGE value="árvore e análise semântica: ids duplicados e vire para" />
     <MESSAGE value="análise semântica concluida" />
-    <option name="LAST_COMMIT_MESSAGE" value="análise semântica concluida" />
+    <MESSAGE value="geracao de codigo concluida" />
+    <option name="LAST_COMMIT_MESSAGE" value="geracao de codigo concluida" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -483,10 +464,16 @@
           <option name="timeStamp" value="29" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Tree.java</url>
-          <line>274</line>
+          <url>file://$PROJECT_DIR$/src/MainCompilador.java</url>
+          <line>201</line>
           <properties />
-          <option name="timeStamp" value="45" />
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/MainCompilador.java</url>
+          <line>168</line>
+          <properties />
+          <option name="timeStamp" value="47" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -789,7 +776,7 @@
     <entry file="file://$PROJECT_DIR$/src/Comando.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="435">
-          <caret line="29" column="34" lean-forward="true" selection-start-line="29" selection-start-column="34" selection-end-line="29" selection-end-column="34" />
+          <caret line="29" column="34" selection-start-line="29" selection-start-column="34" selection-end-line="29" selection-end-column="34" />
           <folding>
             <element signature="e#1107#1108#0" expanded="true" />
             <element signature="e#1141#1142#0" expanded="true" />
@@ -820,8 +807,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Tree.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="109" selection-start-line="109" selection-end-line="109" />
+        <state relative-caret-position="1852">
+          <caret line="394" column="122" selection-start-line="394" selection-start-column="122" selection-end-line="394" selection-end-column="122" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -830,8 +817,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MainCompilador.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="197" selection-start-line="197" selection-end-line="197" />
+        <state relative-caret-position="87">
+          <caret line="169" column="31" selection-start-line="169" selection-start-column="31" selection-end-line="169" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#popularTabelaSintatica#0;class#MainCompilador#0" />

@@ -293,7 +293,7 @@ public class Tree {
             if (noQueAcabeiDeRemover.getClass() == Programa.class) {
 
                 try {
-                    Path path = Paths.get("/home/joanderson/Coding/Compilador/src/outRobot.txt");
+                    Path path = Paths.get("/home/joanderson/Coding/Compilador/src/robot.asm");
                     //String textoExemplo = "teste teste!!";
                     //byte[] linha;
                     //byte[] textoEmBytes = textoExemplo.getBytes();
@@ -392,7 +392,7 @@ public class Tree {
                     if (!MainCompilador.findIdentificadorNaTabelaDeSimbolos(noQueAcabeiDeRemover.getNome())) {
                         //erro:
                         //System.out.println("erro -> de id não encontrado");
-                        resultado.add("Erro semântico: identificador '" + noQueAcabeiDeRemover.getNome() + "' não encontrado.");
+                        resultado.add("Erro semântico: procedimento '" + noQueAcabeiDeRemover.getNome() + "' não declarado.");
                     }
                 }
 

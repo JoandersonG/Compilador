@@ -149,13 +149,15 @@ public class MainCompilador {
                     if (simboloAtual.getToken().equals("ID")){
                         ArrayList<String> erros = arvore.addIdentificador(simboloAtual.getLexema());
                         for (String erro: erros) {
-                            System.out.println(erro);
+                            System.out.print(erro);
+                            System.out.println(" na Linha " + simboloAtual.getLinha());
                         }
                     }
                     else if (simboloAtual.getToken().equals("NUM")){
                         ArrayList<String> erros = arvore.addNumero(simboloAtual.getLexema());
                         for (String erro: erros) {
-                            System.out.println(erro);
+                            System.out.print(erro);
+                            System.out.println(" na Linha " + simboloAtual.getLinha());
                         }
                     }
 
@@ -164,7 +166,8 @@ public class MainCompilador {
                 }
                 else{
                     System.out.println("Erro sintático na linha " + simboloAtual.getLinha() + ", coluna " + simboloAtual.getColuna() + ": \"" + topoPilha.toLowerCase() + "\" era esperado");
-                    return;
+                    if (!pilha.peek().equals("$")) pilha.pop();
+                    else return;
                 }
             }
             else {//topoPilha é um não-terminal
@@ -176,8 +179,8 @@ public class MainCompilador {
                     if (!topoPilha.equals("IDENTIFICADOR") && !topoPilha.equals("NUMERO")){
                         ArrayList<String> erros = arvore.addNonTerminal(topoPilha,ladoDireito);
                         for (String erro: erros) {
-                            System.out.println(erro);
-                            //System.out.println(" na Linha " + simboloAtual.getLinha());
+                            System.out.print(erro);
+                            System.out.println(" na Linha " + simboloAtual.getLinha());
                         }
                     }
 
@@ -196,12 +199,12 @@ public class MainCompilador {
                 }
                 else {
                     System.out.println("Erro sintático na linha " + simboloAtual.getLinha() + ", coluna " + simboloAtual.getColuna() + ": \"" + primeiraProducaoDeNaoTerminal(topoPilha).toLowerCase() + "\" era esperado");
-                    return;
+                    if (!pilha.peek().equals("$")) pilha.pop();
+                    else return;
                 }
             }
         }
         while(!(topoPilha.equals(simboloAtual.getToken()) && pilha.peek().equals("$")));
-        System.out.println("Análise sintática: tudo certo!!");
 
     }
 

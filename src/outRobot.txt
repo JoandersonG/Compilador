@@ -150,7 +150,7 @@ MOV BL, 0;esquerda
         call wait_busy
 popa
 pusha
-mov bl, 20
+mov bl, 8
     mov al, 0
     loop_iteracao12:
         cmp al, bl
@@ -177,7 +177,7 @@ MOV BL, 0;esquerda
         call wait_busy
 popa
 pusha
-mov bl, 15
+mov bl, 4
     mov al, 0
     loop_iteracao15:
         cmp al, bl

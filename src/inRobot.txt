@@ -1,25 +1,17 @@
 PROGRAMAINICIO 
-	#uashuiadhahsdiahsdiaushdua
-
     DEFINAINSTRUCAO Trilha COMO
     inicio    
-    mova 1 passos
+    mova 3 passos
+#    aguarde ate robo pronto
+    vire para esquerda
+vire para direita
+    apagar 
+    apagar lampada
+    vire para direita
+    mova 1 passo
     aguarde ate robo pronto
     fim
-definainstrucao vertical como
-inicio    
-mova 1 passos
-    aguarde ate robo pronto
-fim
-definainstrucao princ como
-inicio   
-        vire para esquerda
-        repita 20 vezes trilha fimrepita
-        vire para esquerda
-        repita 15 vezes vertical fimrepita
-        apague lampada
-fim
     execucaoinicio
-        princ
+    repita 3 vezes Trilha
     FIMEXECUCAO
 FIMPROGRAMA
