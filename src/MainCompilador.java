@@ -192,8 +192,8 @@ public class MainCompilador {
                             listError.add(erro);
 
 
-                            System.out.print(erro);
-                            System.out.println(" na Linha " + simboloAtual.getLinha());
+                            //System.out.print(erro);
+                            //System.out.println(" na Linha " + simboloAtual.getLinha());
                         }
                     }
 
@@ -242,8 +242,8 @@ public class MainCompilador {
                                 listError.add(erro);
 
 
-                            System.out.print(erro);
-                            System.out.println(" na Linha " + simboloAtual.getLinha());
+                            //System.out.print(erro);
+                            //System.out.println(" na Linha " + simboloAtual.getLinha());
                         }
                     }
 

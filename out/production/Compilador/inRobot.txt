@@ -4,7 +4,7 @@ definainstrucao trilha como pare
     DEFINAINSTRUCAO Trilha COMO
     inicio    
     mova 30 passos
-    aguarde ate robo pronto
+    #aguarde ate robo pronto
     vire para esquerda
     apague lampada
     vire para direita
