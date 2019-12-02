@@ -1,18 +1,12 @@
-#programa que foi dado nas especificações
-PROGRAMAINICIO 
-definainstrucao trilha como pare
-    DEFINAINSTRUCAO Trilha COMO
-    inicio    
-    mova 30 passos
-    #aguarde ate robo pronto
-    vire para esquerda
-    apague lampada
-    vire para direita
-    mova 1 passos
-    aguarde ate robo pronto
-    fim
-    execucaoinicio
-    repita 3 vezes Trailha fimrepita
-vire para direita
+#Olá, isso é um comentário.
+#Teste Correto 01 - Mova e acenda a lâmpada. 
+
+PROGRAMAINICIO
+    EXECUCAOINICIO
+	MOVA 3 passos
+	aguarde ate robo pronto
+        Repita 3 VEZES VIRE PARA DIREITA fimrepita
+        ACENDA LAMPADA
     FIMEXECUCAO
+
 FIMPROGRAMA

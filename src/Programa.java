@@ -77,11 +77,11 @@ public class Programa extends No {
                 ";===================================\n" +
                 "wait_busy proc\n" +
                         ";check if robot is still doing something\n" +
-                        "wait:\n" +
+                        "wait_b:\n" +
                         "    in al, 11\n" +
                         "    test al, 00000010b\n" +
                         "    jz wait_busy_end\n" +
-                        "    jmp wait\n" +
+                        "    jmp wait_b\n" +
                         "wait_busy_end: \n" +
                         "ret\n" +
                         "wait_busy endp\n" +

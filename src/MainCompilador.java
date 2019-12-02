@@ -54,7 +54,6 @@ public class MainCompilador {
             for (int j = 0; j < 25; j++) {
                 if(tabelaSintatica[i][j] != null) {
                     tabelaSintatica[i][j] = tabelaSintatica[i][j].toUpperCase();
-                    //System.out.println(tabelaSintatica[i][j]);
                 }
             }
         }
@@ -159,12 +158,6 @@ public class MainCompilador {
                         Erro erro;
                         for (String er: erros) {
 
-                            /*Object erroObj = errosTabela.get("<sint_err>");
-                    Erro erro = new Erro("<sint_err>", erroObj.toString()
-                            .replace("{linha}", String.valueOf(simboloAtual.getLinha()))
-                            .replace("{coluna}", String.valueOf(simboloAtual.getColuna()))
-                            .replace("{esperado}", topoPilha.toLowerCase())
-                    );*/
                             erroObj = errosTabela.get(er.split(",")[0]);
 
                             erro = new Erro(er.split(",")[0], erroObj.toString()
@@ -172,9 +165,6 @@ public class MainCompilador {
                             .replace("{linha}", String.valueOf(simboloAtual.getLinha()))
                             );
                             listError.add(erro);
-//                            System.out.print(er);
-
-//                            System.out.println(" na Linha " + simboloAtual.getLinha());
                         }
                     }
                     else if (simboloAtual.getToken().equals("NUM")){
@@ -191,23 +181,12 @@ public class MainCompilador {
                             );
                             listError.add(erro);
 
-
-                            //System.out.print(erro);
-                            //System.out.println(" na Linha " + simboloAtual.getLinha());
                         }
                     }
 
 
-                    ///////////////}}}}////////////////
                 }
                 else{
-                    /*Object erroObj = errosTabela.get("<lex_id_mal_formado>");
-                                Erro erro = new Erro("<lex_id_mal_formado>", erroObj.toString()
-                                        .replace("{lexema}", getLexemaOriginal(path,linha,coluna))
-                                        .replace("{linha}", String.valueOf(linha))
-                                        .replace("{coluna}", String.valueOf(coluna))
-                                );
-                                listError.add(erro);*/
                     Object erroObj = errosTabela.get("<sint_err>");
                     Erro erro = new Erro("<sint_err>", erroObj.toString()
                             .replace("{linha}", String.valueOf(simboloAtual.getLinha()))
@@ -215,7 +194,6 @@ public class MainCompilador {
                             .replace("{esperado}", topoPilha.toLowerCase())
                     );
                     listError.add(erro);
-                    //System.out.println("Erro sintático na linha " + simboloAtual.getLinha() + ", coluna " + simboloAtual.getColuna() + ": \"" + topoPilha.toLowerCase() + "\" era esperado");
                     return;
                 }
             }
@@ -242,16 +220,9 @@ public class MainCompilador {
                                 listError.add(erro);
 
 
-                            //System.out.print(erro);
-                            //System.out.println(" na Linha " + simboloAtual.getLinha());
+
                         }
                     }
-
-                    //System.out.println(topoPilha);
-
-                ///////////////}}}}////////////////
-
-
 
                     pilha.pop();
                     /////empilhar em sentido inverso o ladoDireito da regra:
@@ -268,7 +239,6 @@ public class MainCompilador {
                             .replace("{esperado}", primeiraProducaoDeNaoTerminal(topoPilha).toLowerCase())
                     );
                     listError.add(erro);
-                    //System.out.println("Erro sintático na linha " + simboloAtual.getLinha() + ", coluna " + simboloAtual.getColuna() + ": \"" + primeiraProducaoDeNaoTerminal(topoPilha).toLowerCase() + "\" era esperado");
                    return;
                 }
             }
@@ -694,11 +664,6 @@ public class MainCompilador {
                             Token token = new Token(lexema.toString(), "ID", linha, coluna);
                             tokenList.add(token);
 
-                            // Verifica se já existe na tabela de símbolos e insere caso contrário
-//                            if (!tabelaSimbolos.containsKey(tokenString)) {
-//                                TabelaSimbolosEntry newEntry = new TabelaSimbolosEntry(lexema.toString(), tokenString);
-//                                tabelaSimbolos.put(tokenString, newEntry);
-//                            }
                         }
                     }
 
@@ -763,12 +728,6 @@ public class MainCompilador {
                             String tokenString = "<identificador, " + lexema.toString() + ">";
                             Token token = new Token(lexema.toString(), "ID", linha, coluna);
                             tokenList.add(token);
-
-                            // Verifica se já existe na tabela de símbolos e insere caso contrário
-//                            if (!tabelaSimbolos.containsKey(tokenString)) {
-//                                TabelaSimbolosEntry newEntry = new TabelaSimbolosEntry(lexema.toString(), tokenString);
-//                                tabelaSimbolos.put(tokenString, newEntry);
-//                            }
                         }
                     }
 
@@ -834,11 +793,6 @@ public class MainCompilador {
                             Token token = new Token(lexema.toString(), "ID", linha, coluna);
                             tokenList.add(token);
 
-                            // Verifica se já existe na tabela de símbolos e insere caso contrário
-//                            if (!tabelaSimbolos.containsKey(tokenString)) {
-//                                TabelaSimbolosEntry newEntry = new TabelaSimbolosEntry(lexema.toString(), tokenString);
-//                                tabelaSimbolos.put(tokenString, newEntry);
-//                            }
                         }
                     }
 
@@ -912,14 +866,6 @@ public class MainCompilador {
             }
         }
 
-//        if (!tabelaSimbolos.isEmpty()) {
-//            System.out.println();
-//            System.out.println("SIMBOLOS");
-//            for (String token : tabelaSimbolos.keySet()) {
-//                System.out.println("Lexema: " + tabelaSimbolos.get(token).getLexema() + " Token: " + tabelaSimbolos.get(token).getToken());
-//            }
-//        }
-
         return tokenList;
     }
 
@@ -939,7 +885,6 @@ public class MainCompilador {
                 if (erro.getCodigo().matches("<sem.*")) {
                     System.out.println("Erro semântico: " + erro.getMensagem());
                 }
-                //System.out.println("Code: " + erro.getCodigo() + " Erro: " + erro.getMensagem());
             }
         }
         System.out.println();
@@ -961,7 +906,6 @@ public class MainCompilador {
         }//saio na linha certa
         cont = 1;
         char[] auxToChar = aux.toCharArray();
-        //char[] lexemaOriginal = new char[];
         StringBuilder sbAux = new StringBuilder();
         for (int j = coluna-1; j < auxToChar.length; j++) {
             sbAux.append(String.valueOf(auxToChar[j]));

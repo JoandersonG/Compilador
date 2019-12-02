@@ -20,19 +20,13 @@ public class Tree {
     }
 
     public Tree() {
-        //tree = new ArrayList<>();
         semanticStack = new Stack<>();
-        //errosSemanticos = new ArrayList<>();
     }
 
     public int nextNoVazio() {
-        /*for (int i = 0; i < tree.size(); i++) {
-            if (tree.get(i).temCampoVazio()) {//todo: conferir essa função temCampoVazio()
-                return i;
-            }
-        }*/
+
         for (int i = tree.size()-2; i >= 0; i--) {
-            if (tree.get(i).temCampoVazio()) {//todo: conferir essa função temCampoVazio()
+            if (tree.get(i).temCampoVazio()) {
                 return i;
             }
         }
@@ -94,71 +88,19 @@ public class Tree {
         if(nonTerminal.equals("LOCALLAMPADA")) {
             tree.add(new LocalLampada(regra));
         }
-       /* if(nonTerminal.equals("IDENTIFICADOR")) {
-            tree.add(new Identificador(regra));
-        }*/
-        /*if(nonTerminal.equals("NUMERO")) {
-            tree.add(new Numero(regra));
-        }*/
+
         if(nonTerminal.equals("SENTIDO")) {
             tree.add(new Sentido(regra));
         }
         int posicaoOndeFoiAlocado = tree.size()-1;
         tree.get(nextNoVazio()).addNoEmProximaPosicaoVazia(posicaoOndeFoiAlocado,nonTerminal);
 
-        //if(tree.get(tree.size()-1).temCampoVazio())
         return gerenciarStackSemantico();
     }
-/*
-    private void manageSemanticStack(int iQueAcabeiDeInserir) {
-        for (No no : tree) {
-            if (no.hasChild(iQueAcabeiDeInserir)) {
-
-            }
-        }
-        for (int i = 0; i < tree.size(); i++) {
-            if (tree.get(i).hasChild(iQueAcabeiDeInserir)) {
-                if(tree.get(i).getNome() != null && tree.get(iQueAcabeiDeInserir).getNome() != null) {
-                    if(!tree.get(i).getNome().equals(tree.get(iQueAcabeiDeInserir).getNome())) {
-                        //erro!!!
-                        System.out.println("Erro: duas declarações com mesmo nome");
-                    }
-                }
-                tree.get(iQueAcabeiDeInserir).setNome(tree.get(i).getNome());
-                manageSemanticStack(i);
-                return;
-            }
-        }
-
-    }*/
-
-
-
-    private ArrayList<String> updateAsm() {
-        tree.get(0).updateAsm();
-        return tree.get(0).getAsm();
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     private ArrayList<String> gerenciarStackSemantico() {
         ArrayList<String>resultado = new ArrayList<>();
-        /*if (semanticStack.isEmpty()) {
-            semanticStack.push(tree.size()-1);//coloco na pilha semântica o último elemento da árvore
-            return;
-        }*/
+
         int topoAnterior = -1;//todo: se não for null
         if (!semanticStack.isEmpty()) {
             topoAnterior = semanticStack.peek();
@@ -221,58 +163,6 @@ public class Tree {
                 tree.get(semanticStack.peek()).setProximoObrigatorio("AGUARDE ATE ROBO PRONTO");
             }
         }
-            //testes de erro:
-//            if (tree.get(semanticStack.peek()).getAtualObrigatorio()!= null) {
-//
-//                if (tree.get(semanticStack.peek()).getAtualObrigatorio().equals("AGUARDE ATE ROBO PRONTO") && !(tree.get(semanticStack.peek()).getVal() == null)) {
-//                    //erro:
-//                    System.out.println("Erro 1 de semantica");
-//                }
-//                else if (tree.get(semanticStack.peek()).getAtualObrigatorio().equals("ROBO PRONTO") && !(tree.get(semanticStack.peek()).getVal() == null)) {
-//
-//                }
-//
-//            }
-
-            /*
-            if (tree.get(semanticStack.peek()).getClass() == EstadoRobo.class && tree.get(topoAnterior).getClass() == Condicao.class && tree.get(semanticStack.peek()).getAtualObrigatorio() != null) {
-                if (((EstadoRobo)tree.get(semanticStack.peek())).getValor().equals("PRONTO")) {
-                    //tudo certo
-                    tree.get(semanticStack.peek()).setAtualObrigatorio(null);
-                }
-                else {
-                    System.out.println("ERRO!!!");
-                }
-            }
-            //if (tree.get(semanticStack.peek()).getAtualObrigatorio() != null && tree.get(semanticStack.peek()).get)
-            if (tree.get(semanticStack.peek()).getAtualObrigatorio() != null && tree.get(semanticStack.peek()).getAtualProibido() != null && tree.get(semanticStack.peek()).getClass() == Comando.class) {
-                //erro!
-                System.out.println("Erro.");
-                tree.get(topoAnterior).setAtualObrigatorio(null);
-            }
-
-
-
-            if (tree.get(topoAnterior).getAtualObrigatorio() != null && tree.get(topoAnterior).getAtualObrigatorio().matches("AGUARDE.*")) {
-                if (tree.get(semanticStack.peek()).)
-            }
-
-            if (tree.get(semanticStack.peek()).getVal() != null && tree.get(semanticStack.peek()).getAtualObrigatorio() != null) {
-                if (tree.get(semanticStack.peek()).getVal().matches("AGUARDE.*")) {
-                    if (tree.get(semanticStack.peek()).getAtualObrigatorio().matches("AGUARDE.*")) {
-                        //tudo certo... continua
-                    }
-                    else {
-                        System.out.println("ERRO semântico...");
-                    }
-                }
-            }
-            //se tou no caso de atualObrigatorio e
-        }
-
-*/
-        //////////////////////////////////
-
 
 
         while(!semanticStack.isEmpty() && !tree.get(semanticStack.peek()).temCampoVazio()) {
@@ -284,58 +174,23 @@ public class Tree {
             //==========================================================================================================//
             ArrayList<String> asm = new ArrayList<>();
 
-           /* if (noQueAcabeiDeRemover.getClass() == Bloco.class) {
-                asm = tree.get(((Bloco)noQueAcabeiDeRemover).getComandoBloco()).getAsm();
-                noQueAcabeiDeRemover.setAsm(asm);
-            }
-
-            if (noQueAcabeiDeRemover.getClass() == Comando.class) {
-
-            }*/
 
             if (noQueAcabeiDeRemover.getClass() == Programa.class) {
 
                 try {
                     Path path = Paths.get("/home/joanderson/Coding/Compilador/src/robot.asm");
-                    //String textoExemplo = "teste teste!!";
-                    //byte[] linha;
-                    //byte[] textoEmBytes = textoExemplo.getBytes();
-                    //Files.write(path,noQueAcabeiDeRemover.getAsm().get(0).getBytes());
-                    //String patha = "/home/joanderson/Coding/Compilador/src/outRobot.txt";
-                    //FileWriter arq = new FileWriter(patha);
-                    //PrintWriter gravarArq = new PrintWriter(arq);
 
                     noQueAcabeiDeRemover.updateAsm();
 
-
-//                    String s = noQueAcabeiDeRemover.getAsm().get(0);
-//                    Charset charset = Charset.forName("US-ASCII");
-//
-//                    BufferedWriter bufferedWriter = Files.newBufferedWriter(path,charset);
-//                    bufferedWriter.write(s, 0, s.length());
-
-
                     Files.write(path,("").getBytes());
                     for (String s : noQueAcabeiDeRemover.getAsm()) {
-                     //   System.out.println(s);
                         String[] split = s.split("\n");
                         for (String sp : split) {
                             Files.write(path,(sp + "\n").getBytes(), StandardOpenOption.APPEND);
 
-                            //arq.write(sp);
-                            //Files.
-                     //       gravarArq.append(sp);
                         }
 
-//                        linha = s.getBytes();
-//                        Files.write(path,linha);
-                        //Files.write(path,s.getBytes(), StandardOpenOption.APPEND);
-                      //  gravarArq.write("teste teste");
-                        //gravarArq.write(s);
-
                     }
-                    //arq.close();
-                    //gravarArq.close();
                 }
                 catch (Exception e) {
                     e.printStackTrace();
@@ -351,8 +206,6 @@ public class Tree {
             //teste de atual obrigatório:
             if (noQueAcabeiDeRemover.getVal() == null && noQueAcabeiDeRemover.getAtualObrigatorio()!=null) {
                 //se o nó que eu removi (que, portanto, era folha) ainda tinha uma obrigação com seu campo atualObrigatório, então é erro semântico
-                //System.out.println("erro semantico 3.3");
-                //resultado.add("Erro semântico: instrução " + noQueAcabeiDeRemover.getAtualObrigatorio() + " era necessária");
                 resultado.add("<sem_instr_necessaria>," + noQueAcabeiDeRemover.getAtualObrigatorio());
             }
             /////
@@ -362,65 +215,21 @@ public class Tree {
                 tree.get(semanticStack.peek()).setAtualProibido(null);
             }
 
-            /*
-            //então tenho q passar para o próx
-            if (!semanticStack.isEmpty() && noQueAcabeiDeRemover.getNome() != null && tree.get(semanticStack.peek()).getNome() != null && tree.get(semanticStack.peek()).getNome().equals(noQueAcabeiDeRemover.getNome())) {
-                //então, tem q ser diferente ao do filho, mas nesse caso está igual, então erro!
-                System.out.println("Erro: duas declarações com mesmo nome: " + noQueAcabeiDeRemover.getNome());
-            }
-            else if (!semanticStack.isEmpty()){
-                tree.get(semanticStack.peek()).setNome(noQueAcabeiDeRemover.getNome());
-            }
-            */
-
-
-            //refatorando anterior:
-//            if (!semanticStack.isEmpty()) {
-//                if (noQueAcabeiDeRemover.getNome() != null) {
-//                    if (tree.get(semanticStack.peek()).getNome() != null) {
-//                        //têm de ser diferentes:
-//                        if (noQueAcabeiDeRemover.getNome().equals(tree.get(semanticStack.peek()).getNome())) {
-//                            //System.out.println("Erro semântico: duas declarações com mesmo nome: " + noQueAcabeiDeRemover.getNome());
-//                            //resultado.add("Erro semântico: mútlipals instruções com mesmo nome: " + noQueAcabeiDeRemover.getNome());
-//                        }
-//                    }
-//                    else if (semanticStack.peek() != 0){//não propaga para a raiz da árvore
-//                        tree.get(semanticStack.peek()).setNome(noQueAcabeiDeRemover.getNome());
-//                    }
-//                }
-//            }
-
             if (noQueAcabeiDeRemover.getClass() == Identificador.class) {
                 if (tree.get(semanticStack.peek()).getClass() == Instrucao.class) {
                     //testa se não existe tal id na tabela de símbolos
                     if (!MainCompilador.findIdentificadorNaTabelaDeSimbolos(noQueAcabeiDeRemover.getNome())) {
                         //erro:
-                        //System.out.println("erro -> de id não encontrado");
-                        //resultado.add("Erro semântico: procedimento '" + noQueAcabeiDeRemover.getNome() + "' não declarado.");
                         resultado.add("<sem_id_nao_dec>," + noQueAcabeiDeRemover.getNome());
                     }
                 }
 
-                /*a ser excluído:
-                * String tokenString = "<identificador, " + lexema.toString() + ">";
-                            if (tokenString.matches("<identificador, >")) {
-                                continue;//token vazio (apenas com quebras) não inserido
-                            }
-                            Token token = new Token(lexema.toString(), "ID", linha, coluna);
-                            tokenList.add(token);
 
-                            // Verifica se já existe na tabela de símbolos e insere caso contrário
-                            if (!tabelaSimbolos.containsKey(tokenString)) {
-                                TabelaSimbolosEntry newEntry = new TabelaSimbolosEntry(lexema.toString(), tokenString);
-                                tabelaSimbolos.put(tokenString, newEntry);
-                            }
-                 */
                 if (tree.get(semanticStack.peek()).getClass() == Declaracao.class) {
                     //então salvar na tabela de símbolos:
                     String tokenString = "<identificador, " + noQueAcabeiDeRemover.getNome() + ">";
                     if (MainCompilador.findIdentificadorNaTabelaDeSimbolos(noQueAcabeiDeRemover.getNome())) {
                         //erro
-                        //resultado.add("Erro semântico: múltiplas instruções com mesmo nome: " + noQueAcabeiDeRemover.getNome());
                         resultado.add("<sem_instr_mesmo_nome>," + noQueAcabeiDeRemover.getNome());
                     }
                     else {
