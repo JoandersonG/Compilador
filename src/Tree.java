@@ -11,7 +11,6 @@ public class Tree {
 
     public static ArrayList<No> tree = new ArrayList<>();
     private Stack<Integer> semanticStack;
-    private ArrayList<Integer> stackSemantico;
     public static ArrayList<String> errosSemanticos = new ArrayList<>();
     private static int idUnico = 0;
 
@@ -113,8 +112,6 @@ public class Tree {
             if (!semanticStack.isEmpty() && topoAnterior!=-1 && tree.get(topoAnterior).getProximoProibido() != null) {
                 boolean teste = tree.get(semanticStack.peek()).setAtualProibido(tree.get(topoAnterior).getProximoProibido());
                 if (!teste) {
-                    //System.out.println("1Erro semântico: instrução \"" + tree.get(topoAnterior).getAtualProibido() + "\" não permitida");
-                    //resultado.add("Erro semântico: instrução \"" + tree.get(topoAnterior).getAtualProibido() + "\" não permitida");
                     resultado.add("<sem_instr_proibida>," + tree.get(topoAnterior).getAtualProibido());
                 }
                 tree.get(topoAnterior).setProximoProibido(null);
@@ -124,8 +121,6 @@ public class Tree {
                     String[] vetorDeProibidos = tree.get(topoAnterior).getAtualProibido().split(" ");
                     boolean teste = tree.get(semanticStack.peek()).setAtualProibido(vetorDeProibidos[vetorDeProibidos.length-1]);//pego só a última palavra, que é o sentido
                     if (!teste) {
-                        //System.out.println("2Erro semântico: instrução \"" + tree.get(topoAnterior).getAtualProibido() + "\" não permitida");
-                        //resultado.add("Erro semântico: instrução \"" + tree.get(topoAnterior).getAtualProibido() + "\" não permitida");
                         resultado.add("<sem_instr_proibida>," + tree.get(topoAnterior).getAtualProibido());
                     }
                 }
@@ -133,8 +128,6 @@ public class Tree {
             else if (!semanticStack.isEmpty() && topoAnterior!=-1 && tree.get(topoAnterior).getAtualProibido() != null) {
                 boolean teste = tree.get(semanticStack.peek()).setAtualProibido(tree.get(topoAnterior).getAtualProibido());
                 if (!teste) {
-                    //System.out.println("3Erro semântico: instrução \"" + tree.get(topoAnterior).getAtualProibido() + "\" não permitida");
-                    //resultado.add("Erro semântico: instrução \"" + tree.get(topoAnterior).getAtualProibido() + "\" não permitida");
                     resultado.add("<sem_instr_proibida>," + tree.get(topoAnterior).getAtualProibido());
                 }
                 //propaguei o atual proibido

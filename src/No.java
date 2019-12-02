@@ -41,8 +41,6 @@ public abstract class No {
     public void setAtualObrigatorio(String atualObrigatorio) {
         if (val != null && !temCampoVazio() && atualObrigatorio != null && atualObrigatorio.matches("AGUARDE.*") && !val.equals("PRONTO")) {
             //erro
-            //System.out.println("erro sem");
-            //Tree.errosSemanticos.add("Erro semântico: instrução 'aguarde ate robo pronto' era esperada");
             Tree.errosSemanticos.add("<sem_instr_necessaria>,\"aguarde ate robo pronto\"");
         }
         this.atualObrigatorio = atualObrigatorio;
@@ -62,10 +60,6 @@ public abstract class No {
     }
 
     public void setVal(String val) {
-//        if (getAtualObrigatorio() != null && getAtualObrigatorio().matches("AGUARDE.*") && !temCampoVazio() && !val.matches("PRONTO")) {
-//            //erro
-//            System.out.println("Erro agr vai");
-//        }
         this.val = val;
     }
 
@@ -97,7 +91,4 @@ public abstract class No {
 
     public abstract boolean temCampoVazio();
 
-    public No primeiroAtributo() {
-        return null;
-    }
 }

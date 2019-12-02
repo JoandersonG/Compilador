@@ -1,8 +1,5 @@
 public class Identificador  extends No {
-    /*
-    private Letra letra;
-    private LetraDigito letraDigito;
-    */
+
     private String id;
 
     public Identificador(String id) {
